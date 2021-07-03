@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def index
     @users = User.all
@@ -11,12 +13,13 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by(id: params[:id])
     return redirect_to :users unless @user
+
     reset_session if current_user == @user
     @user.destroy
     redirect_to :users
   end
 
-  def me    
+  def me
     redirect_to new_user_session_path unless user_signed_in?
     @me = current_user
   end
