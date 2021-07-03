@@ -4,20 +4,20 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    redirect_to :users unless @user
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    return redirect_to :users unless @user
     reset_session if current_user == @user
     @user.destroy
     redirect_to :users
   end
 
   def me    
-    if user_signed_in? == false
-      redirect_to new_user_session_path
-    end
+    redirect_to new_user_session_path unless user_signed_in?
     @me = current_user
   end
 end
