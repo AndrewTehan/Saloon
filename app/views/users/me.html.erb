@@ -4,5 +4,8 @@
     <li><%=@me.last_name%></li>
     <li><%=@me.email%></li>
     <li><%=@me.phone_number%></li>
-    <li><%= link_to "Edit", me_edit_path() %></li>
+    <li><%= link_to "return to users page",
+        users_path,
+        method: :get%>
+    </li>
 </ul>

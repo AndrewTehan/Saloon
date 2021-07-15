@@ -1,13 +1,45 @@
 <h1>users</h1>
+
+<%if current_user%>
+  <h1><%=current_user.last_name%> <%=current_user.first_name%>'s session | 
+    <%= link_to "SIGN_OUT",
+      destroy_user_session_path,
+      method: :delete
+    %>
+  </h1>
+ 
+<%else%>
+  <h1>
+    <%= link_to "SIGN_UP OR LOG_IN",
+    new_user_registration_path,
+    method: :get%>
+  </h1>
+<%end%>
+
+<br/>
+
 <ul>
-  <% @users.each do |user| %>
-    <li><%="#{user.last_name} #{user.first_name.to_s.split('').first}."%></li>
-    <li><%=user.email%></li>
-    <li><%=user.phone_number%></li>
-    <li><%= link_to "Destroy",
-      user_path(user),
-      method: :delete,
-      data: { confirm: "Are you sure?" } %></li>
-    <br>
-  <% end %>
+  <%@users.each do |user|%>
+      <li><%= link_to "#{user.last_name} #{user.first_name.first}.(#{user.type == 'Admin' ? 'Admin' : 'User'})",
+          user_path(user),
+          method: :get
+          %>
+      </li>
+
+      <li><%= link_to "Delete",
+          user_path(user),
+          method: :delete,
+          data: { confirm: "Are you sure?" }
+          %> 
+          &#128465;
+          &nbsp;
+          <%= link_to "Edit",
+          me_edit_path(user, id: user.id),
+          method: :get 
+          %>
+          &#9997;
+      </li>
+      </li>
+      <br/>
+  <%end%>
 </ul>

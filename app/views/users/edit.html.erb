@@ -1,4 +1,9 @@
-<h1>Edit User</h1>
+<h1>Edit User | 
+  <%= link_to "return to users page",
+    users_path,
+    method: :get
+  %>
+</h1>
 
 <%= form_with url: 'edit/' + @user.id.to_s, method: :put, model: @user do |form| %>
     <div>
