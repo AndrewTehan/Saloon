@@ -1,4 +1,4 @@
-<h1>Users#show |
+<h1>User |
   <%= link_to "return to users page",
     users_path,
     method: :get
@@ -6,8 +6,7 @@
 </h1>
 
 <ul>
-    <li><%=@user.first_name%></li>
-    <li><%=@user.last_name%></li>
+    <li><%=@user.last_name + ' ' + @user.first_name + '(' + @user.type + ')'%></li>
     <li><%=@user.email%></li>
     <li><%=@user.phone_number%></li>
 </ul>
