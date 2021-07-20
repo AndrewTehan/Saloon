@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   root 'users#index'
-  devise_for :users, controllers: { confirmations: 'confirmations' }
+  devise_for :users
   resources :users, only: %i[index show destroy edit update]
   get '/me', to: 'users#me'
   get '*path', to: 'errors#error_404', via: :all
