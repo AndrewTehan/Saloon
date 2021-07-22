@@ -1,56 +1,90 @@
-<h1>Users</h1>
+<style>
+   table.users {
+    width: 100%;
+   }
+   th.Client{
+     width: 50%;
+   }
+   th.Role{
+     width: 20%;
+   }
+   th.Actions{
+     width: 30%;
+   }
+</style>
 
-<%if current_user%>
-  <h1><%=current_user.last_name%> <%=current_user.first_name%>'s session | 
-    <%= link_to "SIGN_OUT",
-      destroy_user_session_path,
-      method: :delete
-    %>
-  </h1>
-  <br/>
-<%end%>
+<div class="container">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <img width="50px" src="https://thumbs.dreamstime.com/z/%D0%B7%D0%BD%D0%B0%D1%87%D0%BE%D0%BA-%D0%BF%D0%B0%D1%80%D0%B8%D0%BA%D0%BC%D0%B0%D1%85%D0%B5%D1%80%D0%B0-%D0%BF%D1%80%D0%BE%D0%B7%D1%80%D0%B0%D1%87%D0%BD%D1%8B%D0%B9-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D1%81%D0%B8%D0%BC%D0%B2%D0%BE%D0%BB%D0%B0-%D0%BE%D1%82-pro-130321578.jpg">
+    </a>
 
-<ul>
-  <%if current_user.is_a?(Admin)%>
-    <%@users.each do |user|%>
-      <li><%= link_to "#{user.last_name} #{user.first_name.first}.(#{user.type})",
-        user_path(user),
-        method: :get
-        %>
-      </li>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><h1>Users</h1></li>
+    </ul>
+    
+    <div class="col-md-3 text-end">
+        <span class="btn btn-outline-primary me-2"><%= link_to "SIGN_OUT", destroy_user_session_path, method: :delete %></span>
+    </div>
+  </header>
+</div>
 
-      <li><%= link_to "Delete",
-          user_path(user),
-          method: :delete,
-          data: { confirm: "Are you sure?" }
-        %> 
-        &#128465; &nbsp;
-        <%= link_to "Edit",
-          edit_user_path(user, id: user.id),
-          method: :get 
-        %>
-        &#9997;
-      </li>
-      <br/>
-    <%end%>
-  <%else%>
-    <li><%= link_to "#{current_user.last_name} #{current_user.first_name.first}.(#{current_user.type})",
-      user_path(current_user),
-      method: :get
-      %>
-    </li>
-
-    <li><%= link_to "Delete",
-        user_path(current_user),
-        method: :delete,
-        data: { confirm: "Are you sure?" }
-      %> 
-      &#128465; &nbsp;
-      <%= link_to "Edit",
-        edit_user_path(current_user, id: current_user.id),
-        method: :get 
-      %>
-      &#9997;
-    </li>
-  <%end%>
-</ul>
+<div class="container">
+<h1><%=current_user.last_name%> <%=current_user.first_name%>'s session</h1>
+  <table class="table table-dark table-bordered table-hover table-condensed table-striped users">
+    <thead>
+      <tr>
+        <th class="Client">Сlient</th>
+        <th class="Role">Role</th>
+        <th class="Actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%if current_user.is_a?(Admin)%>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to "#{user.last_name} #{user.first_name}",
+              user_path(user),
+              method: :get
+              %>
+            </td>
+            <td><%= user.type %></td>
+            <td><%= link_to "Delete",
+                user_path(user),
+                method: :delete,
+                data: { confirm: "Are you sure?" }
+              %> 
+              &#128465; &nbsp;
+              <%= link_to "Edit",
+                edit_user_path(user, id: user.id),
+                method: :get 
+              %>
+              &#9997;
+            </td>
+          </tr>
+        <% end %>
+      <%else%>
+        <tr>
+          <td><%= link_to "#{current_user.last_name} #{current_user.first_name}",
+            user_path(current_user),
+            method: :get
+            %>
+          </td>
+          <td><%= current_user.type %></td>
+          <td><%= link_to "Delete",
+            user_path(current_user),
+              method: :delete,
+              data: { confirm: "Are you sure?" }
+            %> 
+            &#128465; &nbsp;
+            <%= link_to "Edit",
+              edit_user_path(current_user, id: current_user.id),
+              method: :get 
+            %>
+            &#9997;
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

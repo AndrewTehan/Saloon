@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  # skip_before_action :verify_authenticity_token !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   def find_user
     return User.find_by(id: params[:id])
   end
 
   def index
-    #render html: helpers.tag.strong('Not Found')
     @users = User.all
   end
 
