@@ -22,6 +22,7 @@
   background: #009edf;
   white-space: nowrap;
   border-radius: .25rem;
+  margin-top: 10px;
 }
 .list-counter-circle>li:last-child {
   margin-bottom: 0;
@@ -66,47 +67,57 @@
   <ol class="list-counter-circle">
     <%if current_user.is_a?(Admin)%>
       <%@users.each do |user|%>
-        <li><%= link_to "#{user.last_name} #{user.first_name.first}.(#{user.type})",
+        <li><%= link_to "#{user.last_name} #{user.first_name}(#{user.type})",
           user_path(user),
           method: :get,
           class: 'text-white'
           %>
         </li>
-      <p><%= link_to "Delete",
-              user_path(user),
-              method: :delete,
-              data: { confirm: "Are you sure?" },
-              type: 'button',
-              class: "btn btn-danger"
-            %>
-            <%= link_to "Edit",
-              edit_user_path(user, id: user.id),
-              method: :get ,
-              type: 'button',
-              class: "btn btn-warning"
-            %>
-          </p>
+      <div type='button', class="actions btn btn-danger">
+        <%= link_to "Delete",
+          user_path(current_user),
+          method: :delete,
+          data: { confirm: "Are you sure?" },
+          class: 'text-white'
+        %>
+        &#128465;
+      </div>
+        &nbsp;
+      <div type='button', class="actions btn btn-info">
+        <%= link_to "Edit",
+          edit_user_path(current_user, id: current_user.id),
+          method: :get,
+          class: 'text-white'
+        %>
+        &#9997;
+      </div>
     <%end%>
     <%else%>
-      <li><%= link_to "#{current_user.last_name} #{current_user.first_name.first}.(#{current_user.type})",
+      <li><%= link_to "#{current_user.last_name} #{current_user.first_name}(#{current_user.type})",
         user_path(current_user),
         method: :get,
         class: 'text-white'
         %>
       </li>
 
-      <p><%= link_to "Delete",
+      <<div type='button', class="actions btn btn-danger">
+        <%= link_to "Delete",
           user_path(current_user),
           method: :delete,
-          data: { confirm: "Are you sure?" }
-        %> 
-        &#128465; &nbsp;
+          data: { confirm: "Are you sure?" },
+          class: 'text-white'
+        %>
+        &#128465;
+      </div>
+        &nbsp;
+      <div type='button', class="actions btn btn-info">
         <%= link_to "Edit",
           edit_user_path(current_user, id: current_user.id),
-          method: :get 
+          method: :get,
+          class: 'text-white'
         %>
         &#9997;
-      </p>
+      </div>
     <%end%>
   </ol> 
 </div>
