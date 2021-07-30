@@ -63,7 +63,10 @@
     <%if current_user.is_a?(Admin)%>
         <%@all_visits.each do |visit|%>
             <li><span>You have a <%=visit.order%> at <%=visit.date%></span></li>
-            <div><p>Your addition: <%=visit.addition%></p></div>
+            <ul>
+              <li><p>Client email: <%=visit.client_email%></p></li>
+              <li><p>Your addition: <%=visit.addition%></p></li>
+            </ul>
             <div class="container row">
                 <div class="col-md-1"></div>
                 <div class="col-md-6"></div>

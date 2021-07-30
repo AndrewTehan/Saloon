@@ -64,7 +64,6 @@ body{
         <div class="row main-form">
             <h2>Edit visit</h2>
             <%= form_with url: user_visit_path(@user, @visit), method: :put, model: @visit do |form| %>
-            
                 <div class="form-group">
                     <%= form.label :date, class: "cols-sm-2 control-label"%>
                     <div class="cols-sm-10">

@@ -10,7 +10,7 @@ class VisitsController < ApplicationController
     end
 
     def create
-        @user = User.find_by(id: params[:admin_id])
+        @user = User.find_by(id: params[:user_id])
         @visit = @user.visits.create(visit_params)
         redirect_to user_path(@user)
     end
@@ -30,7 +30,7 @@ class VisitsController < ApplicationController
 
     def destroy
         @user = User.find(params[:user_id])
-        @visit = @user.visits.find(params[:id])
+        @visit = Visit.find(params[:id])
         @visit.destroy
         redirect_to user_visits_path(@user)
     end
