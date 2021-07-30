@@ -99,24 +99,30 @@
         class: 'text-white'
         %>
       </li>
-
-      <div type='button', class="actions btn btn-danger">
-        <%= link_to "Delete",
-          user_path(current_user),
-          method: :delete,
-          data: { confirm: "Are you sure?" },
-          class: 'text-white'
-        %>
-        &#128465;
-      </div>
-        &nbsp;
-      <div type='button', class="actions btn btn-info">
-        <%= link_to "Edit",
-          edit_user_path(current_user, id: current_user.id),
-          method: :get,
-          class: 'text-white'
-        %>
-        &#9997;
+      <div class="container row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-6">
+        </div>
+        <div type='button', class="actions btn btn-danger col-md-2">
+          <%= link_to "Delete",
+            user_path(current_user),
+            method: :delete,
+            data: { confirm: "Are you sure?" },
+            class: 'text-white'
+          %>
+          &#128465;
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div type='button', class="actions btn btn-info col-md-2">
+          <%= link_to "Edit",
+            edit_user_path(current_user, id: current_user.id),
+            method: :get,
+            class: 'text-white'
+          %>
+          &#9997;
+        </div>
       </div>
     <%end%>
   </ol> 
