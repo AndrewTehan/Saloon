@@ -72,7 +72,7 @@ body{
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
-            <%= f.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
+            <%= f.text_field :first_name, class: "form-control", placeholder: "Enter your first name", required: true %>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ body{
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
-            <%= f.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
+            <%= f.text_field :last_name, class: "form-control", placeholder: "Enter your last name", required: true %>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ body{
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></span>
-            <%= f.text_field :phone_number, class: "form-control", placeholder: "Enter your phone" %>
+            <%= f.text_field :phone_number, class: "form-control", placeholder: "Enter your phone", required: true %>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ body{
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', type: 'text', placeholder: 'Enter your email'  %>    
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', type: 'text', placeholder: 'Enter your email', required: true %>    
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@ body{
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: placeholder="Enter your password" %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: placeholder="Enter your password", required: true %>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@ body{
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: "Confirm your password" %> 
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: "Confirm your password", required: true %> 
           </div>
         </div>
       </div>

@@ -6,13 +6,13 @@ class VisitsController < ApplicationController
     end
 
     def new
-        @user = User.find(params[:user_id])
+        @user = current_user
     end
 
     def create
-        @user = User.find_by(id: params[:user_id])
+        @user = User.find_by(email: params[:client_email])
         @visit = @user.visits.create(visit_params)
-        redirect_to user_path(@user)
+        redirect_to user_visits_path(@user)
     end
 
     def edit
@@ -37,6 +37,6 @@ class VisitsController < ApplicationController
 
     private
     def visit_params
-        params.require(:visit).permit(:client_email, :date, :order, :addition)
+        params.require(:visit).permit(:date, :order, :addition)
     end
 end

@@ -7,12 +7,8 @@ class UsersController < ApplicationController
   end
 
   def index
+    @user = current_user
     @users = User.all
-  end
-
-  def show
-    @user = find_user()
-    redirect_to :users unless @user
   end
 
   def destroy
@@ -23,10 +19,6 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to :users
     end
-  end
-
-  def me
-    @me = current_user
   end
 
   def edit

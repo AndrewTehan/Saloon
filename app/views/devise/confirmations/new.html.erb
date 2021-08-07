@@ -70,11 +70,11 @@ body{
       <div class="form-group">
         <label for="user_email" class="cols-sm-2 control-label">Your Email</label>
         <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control', type: 'text', placeholder: 'Enter your email'  %>
-            </div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control', type: 'text', placeholder: 'Enter your email', required: true %>
           </div>
+        </div>
       </div>
 
       <div class="actions">

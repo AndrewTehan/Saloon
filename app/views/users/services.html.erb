@@ -1,0 +1,145 @@
+<header id="header" class="fixed-top ">
+  <div class="container d-flex align-items-center justify-content-between">
+    <h1>SALON</h1>
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto active'%></li>          
+            <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
+            <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
+            <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
+            <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+                <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
+                <li><%= link_to "Edit", edit_user_path(current_user, id: current_user.id), method: :get, class: 'nav-link scrollto' %></li>
+                <li><%= link_to "Delete", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
+            </ul>
+            </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>
+
+<!-- ======= Services Section ======= -->
+<section id="services" class="services" style="margin-top: 50px">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Services</h2>
+      <p>Our salon provides a wide range of services for women, men and children at a time convenient for you with care and comfort from highly qualified craftsmen.</p>
+    </div>
+
+  </div>
+</section><!-- End Services Section -->
+
+<!-- ======= Features Section ======= -->
+<section id="features" class="features">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #e80368;"></i>Mens Haircuts</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #e361ff;"></i>Womens Haircuts</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #47aeff;"></i>Gray Camuffling</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #ffa76e;"></i>Children's Haircuts</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #11dbcf;"></i>Mustache and Beard Haircut</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #4233ff;"></i>Coloring</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #b2904f;"></i>Highlighting</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #b20969;"></i>Lamination</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #ff5828;"></i>Eyebrow Correction</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #29cc61;"></i>Eyebrow & Eyelash Tint</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #4233ff;"></i>Balayazh</a></h3>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mt-4">
+        <div class="icon-box">
+          <h3><a href=""><i class="ri-check-line" style="color: #ffa76e;"></i>Toning</a></h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="counts" class="counts section-bg">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-emoji-smile"></i>
+          <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+          <p>Happy Clients</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+        <div class="count-box">
+          <i class="bi bi-journal-richtext"></i>
+          <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+          <p>Great Service</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+        <div class="count-box">
+          <i class="bi bi-headset"></i>
+          <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+          <p>Hours Of Support</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+        <div class="count-box">
+          <i class="bi bi-people"></i>
+          <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+          <p>Hard Workers</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Counts Section -->

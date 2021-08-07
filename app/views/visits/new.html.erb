@@ -1,124 +1,92 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<style>
-.form-group{
-  margin-bottom: 15px;
-}
-label{
-  margin-bottom: 15px;
-}
-input,
-input::-webkit-input-placeholder {
-  font-size: 11px;
-  padding-top: 3px;
-}
-.form-control {
-  height: auto!important;
-  padding: 8px 12px !important;
-}
-.input-group {
-  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
-}
-#button {
-  border: 1px solid #ccc;
-  margin-top: 28px;
-  padding: 6px 12px;
-  color: #666;
-  text-shadow: 0 1px #fff;
-  cursor: pointer;
-  border-radius: 3px 3px;
-  box-shadow: 0 1px #fff inset, 0 1px #ddd;
-  background: #f5f5f5;
-  background: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f5f5), color-stop(100%, #eeeeee));
-  background: -webkit-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: -o-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: -ms-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0);
-}
-.main-form{
-  margin-top: 30px;
-  margin: 0 auto;
-  max-width: 400px;
-  padding: 10px 40px;
-  background:#009edf;
-  color: #FFF;
-  text-shadow: none;
-  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-}
-span.input-group-addon i {
-  color: #009edf;
-  font-size: 17px;
-}
-.login-button{
-  margin-top: 5px;
-}
-body{
-    background: #271465;
-    padding-top: 1%;
-}
-</style>
-<body>
-    <div class="container" style="margin-top: 10%">
-    <div class="row main-form">
-        <h2>Add a visit:</h2>
-        <%= form_with url: user_visits_path(@user), model:  @user.visits.build  do |form| %>
-            <div class="form-group">
-                <%= form.label :client_email, class: "cols-sm-2 control-label"%>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                      <%if current_user.is_a?(Admin)%>
-                        <%= form.text_field :client_email, class: "form-control", readonly: false, placeholder: "Enter client email"%>
-                      <%else%>
-                        <%= form.text_field :client_email, class: "form-control", readonly: true, value: @user.email %>
-                      <%end%>
-                    </div>
+<header id="header" class="fixed-top ">
+  <div class="container d-flex align-items-center justify-content-between">
+    <h1>SALON</h1>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto active'%></li>          
+        <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
+        <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
+        <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
+        <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
+            <li><%= link_to "Edit", edit_user_path(current_user, id: current_user.id), method: :get, class: 'nav-link scrollto' %></li>
+            <li><%= link_to "Delete", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
+          </ul>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>
+ <section id="visit" class="visit section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Visit</h2>
+          <p>Send a request to visit the salon to our administration. You will receive an answer shortly.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <i class="bx bx-map"></i>
+                  <h3>Our Address</h3>
+                  <p>A108 Adam Street, New York, NY 535022</p>
                 </div>
-            </div>
-        
-            <div class="form-group">
-                <%= form.label :date, class: "cols-sm-2 control-label"%>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                      <%= form.text_field :date, class: "form-control", type: "datetime-local", value: "yyyy-mm-ddThh:mm:ss" %>
-                    </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>saloonofficial699@gmail.com</p>
                 </div>
-            </div>
-        
-            <div class="form-group">
-                <%= form.label :order, class: "cols-sm-2 control-label"%>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-scissors" aria-hidden="true"></i></span>
-                      <%= form.text_field :order, class: "form-control" %>
-                    </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Call Us</h3>
+                  <p>+1 5589 55488 55</p>
                 </div>
+              </div>
             </div>
 
+          </div>
 
-            <div class="form-group">
-                <%= form.label :addition, class: "cols-sm-2 control-label"%>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-commenting-o" aria-hidden="true"></i></span>
-                      <%= form.text_field :addition, class: "form-control", placeholder: "Enter your wishes" %>
-                    </div>
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <%= form_with url: user_visits_path(@user), class: "php-email-form", model:  @user.visits.build  do |form| %>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <%if current_user.is_a?(Admin)%>
+                    <input type="text" name="client_email" class="form-control" placeholder="Enter email" required="true" />
+                  <%else%>
+                    <input type="text" name="client_email" class="form-control" readonly="true" value=<%=@user.email%> required="true" />
+                  <%end%>
                 </div>
-            </div>
-            <div class="form-group ">
-                <input type="submit" name="commit" value="Submit your application" class="btn btn-primary btn-lg btn-block login-button" data-disable-with="Submit your application" />
-            </div>
-            <div type='button', class="btn btn-warning btn-lg btn-block login-button">
-                <%= link_to "Cancel",
-                    user_path(current_user),
-                    method: :get,
-                    class: 'text-white'
-                %>
-            </div>
-        <% end %>
-    </div>
-    </div> 
-</body>
+              </div>
+
+              <div class="form-group mt-3">
+                <%= form.text_field :date, class: "form-control", type: "datetime-local", value: "yyyy-mm-ddThh:mm:ss", required: true %>
+              </div>
+
+              <div class="form-group mt-3">
+                <%= form.text_field :order, class: "form-control", placeholder: "Enter your order", required: true  %>
+              </div>
+
+              <div class="form-group mt-3">
+                <%= form.text_area :addition, class: "form-control", placeholder: "If you want enter your wishes or preferred master" %>
+              </div>
+
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>

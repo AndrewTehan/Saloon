@@ -1,122 +1,92 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<style>
-/* CSS */
-.list-counter-circle {
-  list-style: none;
-  counter-reset: list;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.list-counter-circle>li {
-  position: relative;
-  display: block;
-  height: 2rem;
-  line-height: 2rem;
-  margin-left: 1.75rem;
-  margin-bottom: .25rem;
-  padding-left: 1rem;
-  padding-right: .5rem;
-  color: #fff;
-  background: #009edf;
-  white-space: nowrap;
-  border-radius: .25rem;
-  margin-top: 10px;
-}
-.list-counter-circle>li:last-child {
-  margin-bottom: 0;
-}
-.list-counter-circle>li::before {
-  content: counter(list);
-  counter-increment: list;
-  position: absolute;
-  left: -2rem;
-  top: -.25rem;
-  bottom: -.25rem;
-  width: 2.5rem;
-  line-height: 2rem;
-  border-radius: 1.25rem;
-  border: .25rem solid #fff;
-  text-align: center;
-  color: #fff;
-  background: #009edf;
-}
-</style>
+<header id="header" class="fixed-top ">
+  <div class="container d-flex align-items-center justify-content-between">
+    <h1>SALON</h1>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto active'%></li>          
+        <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
+        <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
+        <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
+        <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
+            <li><%= link_to "Edit", edit_user_path(current_user, id: current_user.id), method: :get, class: 'nav-link scrollto' %></li>
+            <li><%= link_to "Delete", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
+          </ul>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>
 
-<div class="container">
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><h1>Visit</h1></li>
-    </ul>
-    <div class="col-md-8 text-end">
-        <span class="btn btn-outline-primary me-2"><%= link_to "Cancel", user_path(current_user), method: :get %></span>
-    </div>
-    <div class="col-md-3 text-end">
-        <span class="btn btn-outline-primary me-2"><%= link_to "Return to users page", users_path, method: :get %></span>
-    </div>
-  </header>
-</div>
-
-<div class="container">
-  <ol class="list-counter-circle">
+<section id="why-us" class="why-us" style="margin-top: 150px">
+  <div class="container">
     <%if current_user.is_a?(Admin)%>
-        <%@all_visits.each do |visit|%>
-            <li><span>You have a <%=visit.order%> at <%=visit.date%></span></li>
-            <ul>
-              <li><p>Client email: <%=visit.client_email%></p></li>
-              <li><p>Your addition: <%=visit.addition%></p></li>
-            </ul>
-            <div class="container row">
-                <div class="col-md-1"></div>
-                <div class="col-md-6"></div>
-                <div type='button', class="actions btn btn-danger col-md-2">
-                    <%= link_to "Delete",
-                        user_visit_path(@user, visit),
-                        method: :delete,
-                        data: { confirm: "Are you sure?" },
-                        class: 'text-white'
-                    %>
-                    &#128465;
+      <%if @visit.blank?%>
+        <div class="col-lg-6 hero-img">
+          <img src="/assets/theme/img/norecords.jpg" class="img-fluid" alt="">
+        </div>
+      <%else%>
+        <div class="row">
+          <%@all_visits.each do |visit|%>
+          <% visit_email = User.find_by(id: visit.user_id).email %>
+            <div class="col-lg-4">
+              <div class="box">
+                <span><%=visit.date%></span>
+                <h4>Master name</h4>
+                <p><%=visit_email%>: <%=visit.order%></p>
+                <p><%=visit.addition%></p>
+                <div class="row">
+                  <%= link_to "Delete",
+                    user_visit_path(@user, visit),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    class: 'text-info'
+                  %>
+                  <%= link_to "Edit",
+                    edit_user_visit_path(@user, id: visit.id),
+                    method: :get,
+                    class: 'text-info'
+                  %>
                 </div>
-                <div class="col-md-1"></div>
-                <div type='button', class="actions btn btn-info col-md-2">
-                    <%= link_to "Edit",
-                        edit_user_visit_path(@user, id: visit.id),
-                        method: :get,
-                        class: 'text-white'
-                    %>
-                    &#9997;
-                </div>
+              </div>
             </div>
-        <%end%>
+          <%end%>
+        </div>
+      <%end%>
     <%else%>
-        <%@visits.each do |visit|%>
-            <li><span>You have a <%=visit.order%> at <%=visit.date%></span></li>
-            <div><p>Your addition: <%=visit.addition%></p></div>
-            <div class="container row">
-                <div class="col-md-1"></div>
-                <div class="col-md-6"></div>
-                <div type='button', class="actions btn btn-danger col-md-2">
-                    <%= link_to "Delete",
-                        user_visit_path(@user, visit),
-                        method: :delete,
-                        data: { confirm: "Are you sure?" },
-                        class: 'text-white'
-                    %>
-                    &#128465;
+      <%if @visit.blank?%>
+        <div class="col-lg-6 hero-img">
+          <img src="/assets/theme/img/norecords.jpg" class="img-fluid" alt="">
+        </div>
+      <%else%>
+        <div class="row">
+          <%@visits.each do |visit|%>
+            <div class="col-lg-4">
+                <p><%=visit.addition%></p>
+                <div class="row">
+              <div class="box">
+                <span><%=visit.date%></span>
+                <h4>Master name</h4>
+                <p><%=visit.order%></p>
+                  <%= link_to "Delete",
+                    user_visit_path(@user, visit),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    class: 'col-sm text-info'
+                  %>
+                  <%= link_to "Edit",
+                    edit_user_visit_path(@user, id: visit.id),
+                    method: :get,
+                    class: 'col-sm text-info'
+                  %>
                 </div>
-                <div class="col-md-1"></div>
-                <div type='button', class="actions btn btn-info col-md-2">
-                    <%= link_to "Edit",
-                        edit_user_visit_path(@user, id: visit.id),
-                        method: :get,
-                        class: 'text-white'
-                    %>
-                    &#9997;
-                </div>
-            </div>
-        <%end%>
+              </div>            
+            </div>        
+          <%end%>
+        </div>
+      <%end%>
     <%end%>
-  </ol> 
-</div>
+  </div>
+</section>
