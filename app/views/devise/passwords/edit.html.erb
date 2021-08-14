@@ -1,25 +1,101 @@
-<h2>Change your password</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<style>
+.form-group{
+  margin-bottom: 15px;
+}
+label{
+  margin-bottom: 15px;
+}
+input,
+input::-webkit-input-placeholder {
+  font-size: 11px;
+  padding-top: 3px;
+}
+.form-control {
+  height: auto!important;
+  padding: 8px 12px !important;
+}
+.input-group {
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+}
+#button {
+  border: 1px solid #ccc;
+  margin-top: 28px;
+  padding: 6px 12px;
+  color: #666;
+  text-shadow: 0 1px #fff;
+  cursor: pointer;
+  border-radius: 3px 3px;
+  box-shadow: 0 1px #fff inset, 0 1px #ddd;
+  background: #f5f5f5;
+  background: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f5f5), color-stop(100%, #eeeeee));
+  background: -webkit-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+  background: -o-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+  background: -ms-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+  background: linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0);
+}
+.main-form{
+  margin-top: 30px;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 10px 40px;
+  background:#009edf;
+  color: #FFF;
+  text-shadow: none;
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+}
+span.input-group-addon i {
+  color: #009edf;
+  font-size: 17px;
+}
+.login-button{
+  margin-top: 5px;
+}
+body{
+    background: #271465;
+    padding-top: 5%;
+}
+</style>
+<body>
+  <div class="container">
+    <div class="row main-form">
+      <h3>Change your password</h3>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+        <div class="form-group">
+          <label for="user_email" class="cols-sm-2 control-label">New password
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+            <% end %>
+          </label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+              <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control', required: true %>
+            </div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+        <div class="form-group">
+          <label for="user_email" class="cols-sm-2 control-label">Confirm new password</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', required: true %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group ">
+          <input type="submit" name="commit" value="Change my password" class="btn btn-primary btn-lg btn-block login-button" data-disable-with="Change my password" />
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</body>

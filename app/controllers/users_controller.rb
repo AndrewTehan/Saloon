@@ -7,12 +7,8 @@ class UsersController < ApplicationController
   end
 
   def index
+    @user = current_user
     @users = User.all
-  end
-
-  def show
-    @user = find_user()
-    redirect_to :users unless @user
   end
 
   def destroy
@@ -25,10 +21,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def me
-    @me = current_user
-  end
-
   def edit
     @user = find_user()
     redirect_to users_path unless @user == current_user || current_user.is_a?(Admin)
@@ -37,7 +29,7 @@ class UsersController < ApplicationController
   def update    
     @user = find_user()
     if @user.update user_params
-      redirect_to user_path(@user, id: @user.id)
+      redirect_to users_path
     else
       render :edit
     end

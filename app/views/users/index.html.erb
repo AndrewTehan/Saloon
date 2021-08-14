@@ -1,123 +1,106 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<style>
-/* CSS */
-.list-counter-circle {
-  list-style: none;
-  counter-reset: list;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.list-counter-circle>li {
-  position: relative;
-  display: block;
-  height: 2rem;
-  line-height: 2rem;
-  margin-left: 1.75rem;
-  margin-bottom: .25rem;
-  padding-left: 1rem;
-  padding-right: .5rem;
-  color: #fff;
-  background: #009edf;
-  white-space: nowrap;
-  border-radius: .25rem;
-  margin-top: 10px;
-}
-.list-counter-circle>li:last-child {
-  margin-bottom: 0;
-}
-.list-counter-circle>li::before {
-  content: counter(list);
-  counter-increment: list;
-  position: absolute;
-  left: -2rem;
-  top: -.25rem;
-  bottom: -.25rem;
-  width: 2.5rem;
-  line-height: 2rem;
-  border-radius: 1.25rem;
-  border: .25rem solid #fff;
-  text-align: center;
-  color: #fff;
-  background: #009edf;
-}
-</style>
-
-<div class="container">
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div class="fs-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
-          <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
-        </svg>
-      </div>
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><h1>Users</h1></li>
-    </ul>
-    
-    <div class="col-md-3 text-end">
-        <span class="btn btn-outline-primary me-2"><%= link_to "SIGN_OUT", destroy_user_session_path, method: :delete %></span>
+ <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1>SALON</h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto active'%></li>          
+          <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
+          <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
+          <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
+          <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
+              <li><%= link_to "Edit", edit_user_path(current_user, id: current_user.id), method: :get, class: 'nav-link scrollto' %></li>
+              <li><%= link_to "Delete", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
     </div>
   </header>
-</div>
 
-<div class="container">
-<h1><%=current_user.last_name%> <%=current_user.first_name%>'s session</h1>
-  <ol class="list-counter-circle">
-    <%if current_user.is_a?(Admin)%>
-      <%@users.each do |user|%>
-        <li><%= link_to "#{user.last_name} #{user.first_name}(#{user.type})",
-          user_path(user),
-          method: :get,
-          class: 'text-white'
-          %>
-        </li>
-      <div type='button', class="actions btn btn-danger">
-        <%= link_to "Delete",
-          user_path(current_user),
-          method: :delete,
-          data: { confirm: "Are you sure?" },
-          class: 'text-white'
-        %>
-        &#128465;
-      </div>
-        &nbsp;
-      <div type='button', class="actions btn btn-info">
-        <%= link_to "Edit",
-          edit_user_path(current_user, id: current_user.id),
-          method: :get,
-          class: 'text-white'
-        %>
-        &#9997;
-      </div>
-    <%end%>
-    <%else%>
-      <li><%= link_to "#{current_user.last_name} #{current_user.first_name}(#{current_user.type})",
-        user_path(current_user),
-        method: :get,
-        class: 'text-white'
-        %>
-      </li>
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
 
-      <div type='button', class="actions btn btn-danger">
-        <%= link_to "Delete",
-          user_path(current_user),
-          method: :delete,
-          data: { confirm: "Are you sure?" },
-          class: 'text-white'
-        %>
-        &#128465;
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1>The best in each of you</h1>
+          <ul>
+            <li><i class="ri-check-line"></i> The best hairdressers</li>
+            <li><i class="ri-check-line"></i> Quality and service</li>
+            <li><i class="ri-check-line"></i> Price and your time</li>
+          </ul>
+          <div class="mt-3">
+            <span class="btn-get-started scrollto"><%= link_to "Add visit", new_user_visit_path(@user), method: :get, class: 'text-white' %></span>
+            <span class="btn-get-quote"><%= link_to "My visits", user_visits_path(@user), method: :get, class: 'text-dark' %></span>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img">
+          <img src="assets/theme/img/hero-img.jpg" class="img-fluid" alt="">
+        </div>
       </div>
-        &nbsp;
-      <div type='button', class="actions btn btn-info">
-        <%= link_to "Edit",
-          edit_user_path(current_user, id: current_user.id),
-          method: :get,
-          class: 'text-white'
-        %>
-        &#9997;
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+  
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <ul class="faq-list">
+
+          <li>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Is there parking nearby? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Unfortunately there is no parking nearby.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Is washing your hair included in the price of a haircut? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Yes, the haircut price includes washing and styling.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">How long does the lamination effect last? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                The lamination effect lasts from 3 to 6 weeks. The composition is washed off from the hair gradually, while the repeated procedure is possible before the end of the previous procedure.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">How and where can i buy a gift certificate? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq4" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                It is possible to purchase in any of our salons or order the delivery of a certificate
+              </p>
+            </div>
+          </li>
+        </ul>
+
       </div>
-    <%end%>
-  </ol> 
-</div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Template Main JS File -->
+  <script src="assets/theme/js/main.js"></script>

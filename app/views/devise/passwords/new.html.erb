@@ -54,7 +54,12 @@ span.input-group-addon i {
 .login-button{
   margin-top: 5px;
 }
+body{
+    background: #271465;
+    padding-top: 5%;
+}
 </style>
+<body>
 <div class="container">
   <div class="row main-form">
     <h3>Forgot your password?</h3>
@@ -67,7 +72,7 @@ span.input-group-addon i {
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Enter your email' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Enter your email', required: true %>
           </div>
         </div>
       </div>
@@ -80,3 +85,4 @@ span.input-group-addon i {
     <%= render "devise/shared/links" %>
   </div>
 </div>
+</body>
