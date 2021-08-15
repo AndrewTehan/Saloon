@@ -40,9 +40,9 @@
               <div class="col-md-3" class="form-control">
                 <label for="masters">Choose a master:</label>
                 <% if current_user.is_a?(Admin)%>
-                  <select disabled name="visit[master]" id="masters" >
+                  <select name="visit[master]" id="masters" >
                 <%else%>
-                  <select name="visit[master]" id="masters">
+                  <select disabled name="visit[master]" id="masters">
                 <%end%>
                 
                   <% Team.all.each do |master|%>
