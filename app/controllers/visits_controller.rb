@@ -5,14 +5,29 @@ class VisitsController < ApplicationController
         @visits = @user.visits
     end
 
+    def change_status  
+        @visit = Visit.find(params[:visit_id])
+        case @visit.state
+        when 'sent'
+          @visit.accepted!
+        when 'confirmed'
+          @visit.finished!
+        end
+        redirect_to user_visits_path(current_user)
+    end
+
     def new
         @user = current_user
     end
 
     def create
         @user = User.find_by(email: params[:client_email])
-        @visit = @user.visits.create(visit_params)
-        redirect_to user_visits_path(@user)
+        if(@user != nil)
+            @visit = @user.visits.create(visit_params)
+            redirect_to user_visits_path(@user)
+        else
+            redirect_to new_user_visit_path(current_user), notice: "Book not found"
+        end
     end
 
     def edit
@@ -37,6 +52,6 @@ class VisitsController < ApplicationController
 
     private
     def visit_params
-        params.require(:visit).permit(:date, :order, :addition)
+        params.require(:visit).permit(:date, :order, :addition, :master)
     end
 end

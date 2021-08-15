@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_07_154452) do
+ActiveRecord::Schema.define(version: 2021_08_15_171534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "specializations", force: :cascade do |t|
+    t.string "speciality", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "team_email", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
@@ -42,6 +54,8 @@ ActiveRecord::Schema.define(version: 2021_08_07_154452) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "state", default: "sent", null: false
+    t.string "master", default: ""
     t.index ["user_id"], name: "index_visits_on_user_id"
   end
 

@@ -37,6 +37,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'mailcatcher' 
   gem 'bootstrap', '~> 5.0.1'
+  gem 'aasm'
 end
 
 group :development do

@@ -23,70 +23,85 @@
 <section id="why-us" class="why-us" style="margin-top: 150px">
   <div class="container">
     <%if current_user.is_a?(Admin)%>
-      <%if @visit.blank?%>
-        <div class="col-lg-6 hero-img">
-          <img src="/assets/theme/img/norecords.jpg" class="img-fluid" alt="">
-        </div>
-      <%else%>
-        <div class="row">
-          <%@all_visits.each do |visit|%>
-          <% visit_email = User.find_by(id: visit.user_id).email %>
-            <div class="col-lg-4">
-              <div class="box">
-                <span><%=visit.date%></span>
-                <h4>Master name</h4>
-                <p><%=visit_email%>: <%=visit.order%></p>
-                <p><%=visit.addition%></p>
-                <div class="row">
+      <div class="row">
+        <%@all_visits.each do |visit|%>
+        <% visit_email = User.find_by(id: visit.user_id).email %>
+          <div class="col-lg-4">
+            <div class="box" style="text-align: center">
+              <span ><%=visit.date%></span>
+              <div class="row">
+                <div class="col-md-7">
+                  <span><%=visit.state%></span>
+                </div>
+                <div class="col-md-5">
+                  <%if visit.state != 'done'%>
+                    <span>
+                      <%= link_to "confirm",
+                        change_status_path(visit_id: visit.id),
+                        method: :put,
+                        class: 'text-info'
+                      %>
+                    </span>                    
+                  <%end%> 
+                </div>
+              </div>
+              <p><%=visit_email%>: <%=visit.order%></p>
+              <p><%=visit.addition%></p>
+              <p><%=visit.master%></p>
+              <div class="row">
+                <div class="col-md-6">
                   <%= link_to "Delete",
                     user_visit_path(@user, visit),
                     method: :delete,
                     data: { confirm: "Are you sure?" },
-                    class: 'text-info'
+                    class: 'col-sm text-info'
                   %>
+                </div>
+                <div class="col-md-6">
                   <%= link_to "Edit",
                     edit_user_visit_path(@user, id: visit.id),
                     method: :get,
-                    class: 'text-info'
+                    class: 'col-sm text-info'
                   %>
                 </div>
               </div>
             </div>
-          <%end%>
-        </div>
-      <%end%>
+          </div>
+        <%end%>
+      </div>
     <%else%>
-      <%if @visit.blank?%>
-        <div class="col-lg-6 hero-img">
-          <img src="/assets/theme/img/norecords.jpg" class="img-fluid" alt="">
-        </div>
-      <%else%>
-        <div class="row">
-          <%@visits.each do |visit|%>
-            <div class="col-lg-4">
-                <p><%=visit.addition%></p>
-                <div class="row">
+      <div class="row">
+        <%@visits.each do |visit|%>
+          <div class="col-lg-4">
+            <p><%=visit.addition%></p>
+            <div class="row">
               <div class="box">
                 <span><%=visit.date%></span>
-                <h4>Master name</h4>
+                <span><%=visit.state%></span>
                 <p><%=visit.order%></p>
-                  <%= link_to "Delete",
-                    user_visit_path(@user, visit),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" },
-                    class: 'col-sm text-info'
-                  %>
-                  <%= link_to "Edit",
-                    edit_user_visit_path(@user, id: visit.id),
-                    method: :get,
-                    class: 'col-sm text-info'
-                  %>
+                <p><%=visit.master%></p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= link_to "Delete",
+                      user_visit_path(@user, visit),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" },
+                      class: 'col-sm text-info'
+                    %>
+                  </div>
+                  <div class="col-md-6">
+                    <%= link_to "Edit",
+                      edit_user_visit_path(@user, id: visit.id),
+                      method: :get,
+                      class: 'col-sm text-info'
+                    %>
+                  </div>
                 </div>
-              </div>            
-            </div>        
-          <%end%>
-        </div>
-      <%end%>
+              </div>
+            </div>            
+          </div>        
+        <%end%>
+      </div>
     <%end%>
   </div>
 </section>

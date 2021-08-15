@@ -44,13 +44,12 @@
 
   <body>
     <!-- flash notifications -->    
-      <% logger.info("flash => #{flash.keys}") %>
-      <% flash.each do |type, msg| %>
-        <script>
-          alert("<%= msg %>");
-        </script>
-      <% end %>
-
+    <% logger.info("flash => #{flash.keys}") %>
+    <% flash.each do |type, msg| %>
+      <script>
+        alert("<%= msg %>");
+      </script>
+    <% end %>
     <%= yield %>
   </body>
 </html>
