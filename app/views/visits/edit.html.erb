@@ -20,7 +20,7 @@
     </nav>
   </div>
 </header>
- <section id="visit" class="visit section-bg">
+ <section id="visit" class="visit section-bg" style="margin-top: 150px">
   <div class="container">
 
     <div class="section-title">
@@ -50,7 +50,7 @@
           <div class="form-group mt-3">
             <select class="form-select" aria-label="Default select example" name="visit[order]" id="orders" required="true">
               <% Service.all.each do |s| %>
-                <option value=<%= s.id %>>
+                <option value=<%= s.master_service %>>
                   <%= s.master_service %> - <%= s.cost %> $
                 </option>
               <% end %>
@@ -64,7 +64,7 @@
           <div class="my-3">
             <div class="loading">Loading</div>
             <div class="error-message"></div>
-            <div class="sent-message">Your irder has been edited. Thank you!</div>
+            <div class="sent-message">Your order has been edited. Thank you!</div>
           </div>
           <div class="text-center"><button type="submit">Edit</button></div>
         <% end %>

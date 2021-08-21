@@ -35,6 +35,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def team
+    @masters = Master.all
+  end
+
   private
   def user_params
     params.require(@user.is_a?(Admin) ? :admin : :user).permit(:first_name, :last_name, :email, :phone_number)

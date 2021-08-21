@@ -28,7 +28,7 @@
         </div>
 
         <div class="row">
-        <% Master.all.each do |master|%>
+        <% @masters.each do |master|%>
             <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                 <div class="member">
                     <div class="member-img">
@@ -37,6 +37,7 @@
                     <div class="member-info">
                         <h4><%= master.name%></h4>
                         <span> <%= master.phone_number %></span>
+                        <span> <%= master.rank %></span>
                     </div>
                 </div>
             </div>

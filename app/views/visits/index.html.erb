@@ -23,53 +23,58 @@
 <section id="why-us" class="why-us" style="margin-top: 150px">
   <div class="container">
     <%if current_user.is_a?(Admin)%>
-      <div class="row">
-        <%@all_visits.each do |visit|%>
-        <% visit_email = User.find_by(id: visit.user_id).email %>
-          <div class="col-lg-4">
-            <div class="box" style="text-align: center">
-              <span ><%=visit.date%></span>
-              <div class="row">
-                <div class="col-md-7">
-                  <span><%=visit.state%></span>
+      <% if @all_visits.any?%>
+        <div class="row">
+          <%@all_visits.each do |visit|%>
+            <% visit_email = User.find_by(id: visit.user_id).email %>
+            <div class="col-lg-4">
+              <div class="box" style="text-align: center">
+                <span ><%=visit.date%></span>
+                <div class="row">
+                  <div class="col-md-7">
+                    <span><%=visit.state%></span>
+                  </div>
+                  <div class="col-md-5">
+                    <%if visit.state != 'done'%>
+                      <span>
+                        <%= link_to "confirm",
+                          change_status_path(visit_id: visit.id),
+                          method: :put,
+                          class: 'text-info'
+                        %>
+                      </span>                    
+                    <%end%> 
+                  </div>
                 </div>
-                <div class="col-md-5">
-                  <%if visit.state != 'done'%>
-                    <span>
-                      <%= link_to "confirm",
-                        change_status_path(visit_id: visit.id),
-                        method: :put,
-                        class: 'text-info'
-                      %>
-                    </span>                    
-                  <%end%> 
-                </div>
-              </div>
-              <p><%=visit_email%>: <%=visit.order%></p>
-              <p><%=visit.addition%></p>
-              <div class="row">
-                <div class="col-md-6">
-                  <%= link_to "Delete",
-                    user_visit_path(@user, visit),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" },
-                    class: 'col-sm text-info'
-                  %>
-                </div>
-                <div class="col-md-6">
-                  <%= link_to "Edit",
-                    edit_user_visit_path(@user, id: visit.id),
-                    method: :get,
-                    class: 'col-sm text-info'
-                  %>
+                <p><%=visit_email%>: <%=visit.order%></p>
+                <p><%=visit.addition%></p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= link_to "Delete",
+                      user_visit_path(@user, visit),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" },
+                      class: 'col-sm text-info'
+                    %>
+                  </div>
+                  <div class="col-md-6">
+                    <%= link_to "Edit",
+                      edit_user_visit_path(@user, id: visit.id),
+                      method: :get,
+                      class: 'col-sm text-info'
+                    %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <%end%>
-      </div>
+          <%end%>
+        </div>
+      <%else%>
+        <h4>Empty(</h4>
+      <%end%>
     <%else%>
       <div class="row">
+      <%if @visits.any?%>
         <%@visits.each do |visit|%>
           <div class="col-lg-4">
             <p><%=visit.addition%></p>
@@ -99,6 +104,9 @@
             </div>            
           </div>        
         <%end%>
+      <%else%>
+        <h4>Empty(</h4>
+      <%end%>
       </div>
     <%end%>
   </div>
