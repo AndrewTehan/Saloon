@@ -19,74 +19,88 @@
     </nav>
   </div>
 </header>
+
  <section id="visit" class="visit section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Visit</h2>
-          <p>Send a request to visit the salon to our administration. You will receive an answer shortly.</p>
-        </div>
-
+  <div class="container">
+    <div class="section-title">
+      <h2>Visit</h2>
+      <p>Send a request to visit the salon to our administration. You will receive an answer shortly.</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
         <div class="row">
-          <div class="col-lg-6">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="info-box">
-                  <i class="bx bx-map"></i>
-                  <h3>Our Address</h3>
-                  <p>A108 Adam Street, New York, NY 535022</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>saloonofficial699@gmail.com</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-phone-call"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
-                </div>
-              </div>
+          <div class="col-md-12">
+            <div class="info-box">
+              <i class="bx bx-map"></i>
+              <h3>Our Address</h3>
+              <p>A108 Adam Street, New York, NY 535022</p>
             </div>
-
           </div>
-
-          <div class="col-lg-6 mt-4 mt-lg-0">
-            <%= form_with url: user_visits_path(@user), class: "php-email-form", model:  @user.visits.build  do |form| %>
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <%if current_user.is_a?(Admin)%>
-                    <input type="text" name="client_email" class="form-control" placeholder="Enter email" required="true" />
-                  <%else%>
-                    <input type="text" name="client_email" class="form-control" readonly="true" value=<%=@user.email%> required="true" />
-                  <%end%>
-                </div>
-              </div>
-
-              <div class="form-group mt-3">
-                <%= form.text_field :date, class: "form-control", type: "datetime-local", value: "yyyy-mm-ddThh:mm:ss", required: true %>
-              </div>
-
-              <div class="form-group mt-3">
-                <%= form.text_field :order, class: "form-control", placeholder: "Enter your order", required: true  %>
-              </div>
-
-              <div class="form-group mt-3">
-                <%= form.text_area :addition, class: "form-control", placeholder: "If you want enter your wishes or preferred master" %>
-              </div>
-
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            <% end %>
+          <div class="col-md-6">
+            <div class="info-box mt-4">
+              <i class="bx bx-envelope"></i>
+              <h3>Email Us</h3>
+              <p>saloonofficial699@gmail.com</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="info-box mt-4">
+              <i class="bx bx-phone-call"></i>
+              <h3>Call Us</h3>
+              <p>+1 5589 55488 55</p>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+
+      <div class="col-lg-6 mt-4 mt-lg-0">
+        <%= form_with url: user_visits_path(@user), class: "php-email-form", model:  @user.visits.build  do |form| %>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <%if current_user.is_a?(Admin)%>
+                <input type="text" name="client_email" class="form-control" placeholder="Enter email" required="true" />
+              <%else%>
+                <input type="text" name="client_email" class="form-control" readonly="true" value=<%=@user.email%> required="true" />
+              <%end%>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <%= form.text_field :date, class: "form-control", type: "datetime-local", value: "yyyy-mm-ddThh:mm:ss", required: true %>
+          </div>
+
+          <div class="form-group mt-3">
+            <select class="form-select" aria-label="Default select example" name="visit[master_id]" id="masters" required="true">
+              <% Master.all.each do |m| %>
+                <option value=<%= m.id %>>
+                  <%= m.name %>
+                </option>
+              <% end %>
+            </select>
+          </div>
+
+          <div class="form-group mt-3">
+            <select class="form-select" aria-label="Default select example" name="visit[order]" id="orders" required="true">
+              <% Service.all.each do |s| %>
+                <option value=<%= s.master_service %>>
+                  <%= s.master_service %> - <%= s.cost %> $
+                </option>
+              <% end %>
+            </select>
+          </div>
+
+          <div class="form-group mt-3">
+            <%= form.text_area :addition, class: "form-control", placeholder: "If you want enter your wishes or preferred master" %>
+          </div>
+
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your message has been sent. Thank you!</div>
+          </div>
+          <div class="text-center"><button type="submit">Send Message</button></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

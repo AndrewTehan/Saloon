@@ -26,7 +26,7 @@ class VisitsController < ApplicationController
             @visit = @user.visits.create(visit_params)
             redirect_to user_visits_path(@user)
         else
-            redirect_to new_user_visit_path(current_user), notice: "Book not found"
+            redirect_to new_user_visit_path(current_user), notice: "Error"
         end
     end
 
@@ -52,6 +52,6 @@ class VisitsController < ApplicationController
 
     private
     def visit_params
-        params.require(:visit).permit(:date, :order, :addition, :master)
+        params.require(:visit).permit(:date, :order, :addition, :master_id)
     end
 end

@@ -28,20 +28,18 @@
         </div>
 
         <div class="row">
-        <% Team.all.each do |team|%>
+        <% @masters.each do |master|%>
             <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-                <div class="member-img">
-                <img src="assets/theme/img/team/team-1.jpg" class="img-fluid" alt="">
+                <div class="member">
+                    <div class="member-img">
+                        <img src="assets/theme/img/team/team-1.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h4><%= master.name%></h4>
+                        <span> <%= master.phone_number %></span>
+                        <span> <%= master.rank %></span>
+                    </div>
                 </div>
-                <div class="member-info">
-                <h4><%= team.first_name%> <%= team.last_name%></h4>
-                <% spec = Specialization.where("team_email = '#{team.email}'")%>
-                <% spec.each do |spec|%>
-                    <span> <%= spec.speciality %></span>
-                <%end%>
-                </div>
-            </div>
             </div>
             <%end%>
         </div>

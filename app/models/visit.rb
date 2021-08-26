@@ -16,4 +16,8 @@ class Visit < ApplicationRecord
   end
 
   belongs_to :user
+  belongs_to :master
+
+  has_many :service_visits
+  has_many :services, through: :service_visits # услуги для суммирования
 end

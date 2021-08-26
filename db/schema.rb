@@ -10,19 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_15_171534) do
+ActiveRecord::Schema.define(version: 2021_08_21_075715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "specializations", force: :cascade do |t|
-    t.string "speciality", null: false
+  create_table "master_services", force: :cascade do |t|
+    t.integer "service_id"
+    t.integer "master_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "team_email", null: false
   end
 
-  create_table "teams", force: :cascade do |t|
+  create_table "masters", force: :cascade do |t|
+    t.string "name"
+    t.string "master_email"
+    t.string "phone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "rank"
+  end
+
+  create_table "service_visits", force: :cascade do |t|
+    t.integer "service_id"
+    t.integer "visit_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "master_service", null: false
+    t.string "cost", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -55,9 +73,13 @@ ActiveRecord::Schema.define(version: 2021_08_15_171534) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "state", default: "sent", null: false
-    t.string "master", default: ""
+    t.bigint "master_id", null: false
     t.index ["user_id"], name: "index_visits_on_user_id"
   end
 
+  add_foreign_key "master_services", "masters"
+  add_foreign_key "master_services", "services"
+  add_foreign_key "service_visits", "services"
+  add_foreign_key "service_visits", "visits"
   add_foreign_key "visits", "users"
 end
