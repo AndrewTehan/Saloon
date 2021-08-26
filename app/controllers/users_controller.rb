@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     @masters = Master.all
   end
 
+  def services
+    @services = Service.all
+  end
+
   private
   def user_params
     params.require(@user.is_a?(Admin) ? :admin : :user).permit(:first_name, :last_name, :email, :phone_number)
