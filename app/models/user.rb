@@ -9,13 +9,3 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 end
-
-
-# # связующая услуга+запись
-# # table service_visits:  id:integer service_id:interger visit_id:integer
-# constraint service_id:foreign_key visit_id:foreign_key
-
-
-# # связующая таблица мастер + специализация
-# # table master_services:  id:integer service_id:interger master_id:integer
-# constraint service_id:foreign_key master_id:foreign_key

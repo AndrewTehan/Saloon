@@ -37,66 +37,13 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-lg-3 col-md-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #e80368;"></i>Mens Haircuts</a></h3>
+      <% @services.each do |service|%>
+        <div class="col-lg-3 col-md-4">
+          <div class="icon-box">
+            <h3><a href=""><i class="ri-check-line" style="color: #e80368;"></i><%= service.master_service%></a></h3>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #e361ff;"></i>Womens Haircuts</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #47aeff;"></i>Gray Camuffling</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #ffa76e;"></i>Children's Haircuts</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #11dbcf;"></i>Mustache and Beard Haircut</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #4233ff;"></i>Coloring</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #b2904f;"></i>Highlighting</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #b20969;"></i>Lamination</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #ff5828;"></i>Eyebrow Correction</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #29cc61;"></i>Eyebrow & Eyelash Tint</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #4233ff;"></i>Balayazh</a></h3>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="icon-box">
-          <h3><a href=""><i class="ri-check-line" style="color: #ffa76e;"></i>Toning</a></h3>
-        </div>
-      </div>
+      <%end%>
     </div>
 
   </div>
