@@ -1,10 +1,21 @@
  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
-      <h1>SALON</h1>
+      <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto active'%></li>          
+          <li class="dropdown"><a href="#"><span>Home</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto '%></li>
+              <li><%= link_to "Add visit", new_user_visit_path(@user), method: :get, class: 'nav-link scrollto ' %></li>
+              <%if @current_user.is_a?(Admin)%>
+                <li><%= link_to "All visits", user_visits_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
+                <li><%= link_to "Clients list", clients_path(), method: :get, class: 'nav-link scrollto ' %></li>
+              <%else%>
+                <li><%= link_to "My visits", user_visits_path(@user), method: :get, class: 'nav-link scrollto ' %></li>
+              <%end%>
+            </ul>
+          </li>
           <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
           <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
           <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
@@ -35,7 +46,11 @@
           </ul>
           <div class="mt-3">
             <span class="btn-get-started scrollto"><%= link_to "Add visit", new_user_visit_path(@user), method: :get, class: 'text-white' %></span>
-            <span class="btn-get-quote"><%= link_to "My visits", user_visits_path(@user), method: :get, class: 'text-dark' %></span>
+            <%if @current_user.is_a?(Admin)%>
+              <span class="btn-get-quote"><%= link_to "All visits", user_visits_path(@user), class: 'text-dark' %></span>
+            <%else%>
+              <span class="btn-get-quote"><%= link_to "My visits", user_visits_path(@user), method: :get, class: 'text-dark' %></span>
+            <%end%>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
