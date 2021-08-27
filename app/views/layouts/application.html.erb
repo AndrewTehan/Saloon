@@ -43,13 +43,17 @@
   </head>
 
   <body>
-    <!-- flash notifications -->    
-    <% logger.info("flash => #{flash.keys}") %>
-    <% flash.each do |type, msg| %>
-      <script>
-        alert("<%= msg %>");
-      </script>
-    <% end %>
-    <%= yield %>
+      <br/>
+      <br/>
+      <br/>
+      <!-- flash notifications -->    
+      <% logger.info("flash => #{flash.keys}") %>
+      <% flash.each do |type, msg| %>
+        <div style="margin-top: 50px" class='alert alert-primary' role='alert'>
+          <%= msg %>
+        </div>
+      <% end %>    
+    <!-- End flash notifications --> 
+    <%= yield%>
   </body>
 </html>

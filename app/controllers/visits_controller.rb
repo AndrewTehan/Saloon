@@ -4,6 +4,11 @@ class VisitsController < ApplicationController
         @user = User.find(params[:user_id])
         @visits = @user.visits
     end
+    
+    def admin_index
+        @visits = Visit.all
+    end
+
 
     def change_status  
         @visit = Visit.find(params[:visit_id])
@@ -18,6 +23,8 @@ class VisitsController < ApplicationController
 
     def new
         @user = current_user
+        @masters = Master.all
+        @services = Service.all
     end
 
     def create

@@ -1,6 +1,5 @@
 <header id="header" class="fixed-top ">
   <div class="container d-flex align-items-center justify-content-between">
-  
     <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
     <nav id="navbar" class="navbar">
       <ul>
@@ -31,55 +30,21 @@
     </nav>
   </div>
 </header>
- <section id="visit" class="visit section-bg" style="margin-top: 150px">
-  <div class="container">
 
-    <div class="section-title">
-      <h2>Edit Visit</h2>
-    </div>
-
-    <div class="row">
-      <div class="col-sm">
-        <%= form_with url: user_visit_path(@user, @visit), class: "php-email-form", method: :put, model: @visit do |form| %>
-
-          <div class="form-group mt-3">
+<section id="why-us" class="why-us" style="margin-top: 150px">
+    <div class="container">
+        <div class="row">
             <div class="row">
-              <div class="col-md-9">
-                <%= form.text_field :date, class: "form-control", type: "datetime-local", value: @visit.date, required: true %>
-              </div>
-
-              <div class="col-md-3" class="form-group mt-3">
-                  <select class="form-select" aria-label="Default select example" name="visit[master]" id="masters" >                
-                    <% Master.all.each do |master|%>
-                      <option value="<%= master.name %>"><%= master.name %></option>
-                    <%end%>
-                </select>
-              </div>
+                <%@clients.each do |client|%>
+                    <div class="col-lg-4">
+                        <div class="box" style="text-align: center">
+                            <span><%=client.first_name%> <%=client.last_name%></span>
+                            <p><%=client.email%></p>
+                            <span><%=client.phone_number%></span>
+                        </div>
+                    </div>
+                <%end%>
             </div>
-          </div>
-
-          <div class="form-group mt-3">
-            <select class="form-select" aria-label="Default select example" name="visit[order]" id="orders" required="true">
-              <% Service.all.each do |s| %>
-                <option value=<%= s.master_service %>>
-                  <%= s.master_service %> - <%= s.cost %> $
-                </option>
-              <% end %>
-            </select>
-          </div>
-
-          <div class="form-group mt-3">
-            <%= form.text_area :addition, class: "form-control", value: @visit.addition %>
-          </div>
-
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your order has been edited. Thank you!</div>
-          </div>
-          <div class="text-center"><button type="submit">Edit</button></div>
-        <% end %>
-      </div>
+        </div>
     </div>
-  </div>
 </section>
