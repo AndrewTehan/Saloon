@@ -47,9 +47,9 @@
           <div class="mt-3">
             <span class="btn-get-started scrollto"><%= link_to "Add visit", new_user_visit_path(@user), method: :get, class: 'text-white' %></span>
             <%if @current_user.is_a?(Admin)%>
-              <span class="btn-get-quote"><%= link_to "All visits", user_visits_path(@user), class: 'text-dark' %></span>
+              <span class="btn-get-started scrollto"><%= link_to "All visits", user_visits_path(@user), method: :get, class: 'text-white'%></span>
             <%else%>
-              <span class="btn-get-quote"><%= link_to "My visits", user_visits_path(@user), method: :get, class: 'text-dark' %></span>
+              <span class="btn-get-started scrollto"><%= link_to "My visits", user_visits_path(@user), method: :get, class: 'text-white' %></span>
             <%end%>
           </div>
         </div>
