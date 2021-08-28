@@ -39,6 +39,8 @@ group :development, :test do
   gem 'mailcatcher' 
   gem 'bootstrap', '~> 5.0.1'
   gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
