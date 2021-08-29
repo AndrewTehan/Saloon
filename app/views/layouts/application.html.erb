@@ -41,11 +41,43 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-      <br/>
-      <br/>
-      <br/>
+    <header id="header" class="fixed-top ">
+      <div class="container d-flex align-items-center justify-content-between">
+        <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
+        <nav id="navbar" class="navbar">
+          <ul>
+              <% if current_user%>
+                <li class="dropdown"><a href="#"><span>Visits</span> <i class="bi bi-chevron-down"></i></a>
+                  <ul>
+                    <li><%= link_to "Add visit", new_client_visit_path(current_user), method: :get, class: 'nav-link scrollto ' %></li>
+                      <%if current_user.is_a?(Admin)%>
+                        <li><%= link_to "All visits", client_visits_path(current_user), method: :get, class: 'nav-link scrollto ' %></li>
+                        <li><%= link_to "Clients list", clients_path(), method: :get, class: 'nav-link scrollto ' %></li>
+                      <%else%>
+                        <li><%= link_to "My visits", client_visits_path(current_user), method: :get, class: 'nav-link scrollto ' %></li>
+                      <%end%>
+                  </ul>
+                </li>
+              <%end%>
+              <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
+              <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
+              <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
+              <% if current_user%>
+                <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+                  <ul>
+                    <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
+                    <li><%= link_to "Edit", edit_client_path(current_user, id: current_user.id), method: :get, class: 'nav-link scrollto' %></li>
+                    <li><%= link_to "Delete", client_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
+                  </ul>
+                </li>
+              <%end%>
+            </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+      </div>
+    </header>
+
       <!-- flash notifications -->    
       <% logger.info("flash => #{flash.keys}") %>
       <% flash.each do |type, msg| %>

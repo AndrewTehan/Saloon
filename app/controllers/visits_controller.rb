@@ -1,8 +1,8 @@
 class VisitsController < ApplicationController
   def index
     @all_visits = Visit.all
-    @user = User.find(params[:user_id])
-    @visits = @user.visits
+    @client = Client.find(params[:client_id])
+    @visits = @client.visits
   end
 
   def admin_index
@@ -21,39 +21,39 @@ class VisitsController < ApplicationController
   end
 
   def new
-    @user = current_user
+    @client = current_user
     @masters = Master.all
     @services = Service.all
   end
 
   def create
-    @user = User.find_by(email: params[:client_email])
-    if !@user.nil?
-      @visit = @user.visits.create(visit_params)
-      redirect_to user_visits_path(@user)
+    @client = Client.find_by(email: params[:client_email])
+    if !@client.nil?
+      @visit = @client.visits.create(visit_params)
+      redirect_to client_visits_path(@client)
     else
       redirect_to new_user_visit_path(current_user), notice: 'Error'
     end
   end
 
   def edit
-    @user = User.find_by(id: params[:user_id])
+    @client = Client.find_by(id: params[:client_id])
     @visit = Visit.find_by(id: params[:id])
   end
 
   def update
-    @user = User.find_by(id: params[:user_id])
+    @client = Client.find_by(id: params[:client_id])
     @visit = Visit.find_by(id: params[:id])
     @visit.update(visit_params)
 
-    redirect_to user_visits_path(@user)
+    redirect_to user_visits_path(@client)
   end
 
   def destroy
-    @user = User.find(params[:user_id])
+    @client = Client.find(params[:client_id])
     @visit = Visit.find(params[:id])
     @visit.destroy
-    redirect_to user_visits_path(@user)
+    redirect_to user_visits_path(@client)
   end
 
   private

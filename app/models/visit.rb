@@ -15,10 +15,10 @@ class Visit < ApplicationRecord
     end
   end
 
-  belongs_to :user
+  belongs_to :client
   belongs_to :master
 
-  has_one :service_visit
+  has_one :service_visit, dependent: :destroy
   has_one :service, through: :service_visit
 
   accepts_nested_attributes_for :service_visit
