@@ -1,7 +1,7 @@
 class Visit < ApplicationRecord
   include AASM
 
-  aasm :column => 'state' do
+  aasm column: 'state' do
     state :sent, initial: true
     state :confirmed
     state :done
@@ -18,6 +18,8 @@ class Visit < ApplicationRecord
   belongs_to :user
   belongs_to :master
 
-  has_one :service_visits
-  has_one :services, through: :service_visits
+  has_one :service_visit
+  has_one :service, through: :service_visit
+
+  accepts_nested_attributes_for :service_visit
 end
