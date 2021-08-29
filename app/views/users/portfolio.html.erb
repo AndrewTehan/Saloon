@@ -3,7 +3,7 @@
     <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
     <nav id="navbar" class="navbar">
         <ul>
-          <li class="dropdown"><a href="#"><span>Home</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span><%= t 'index.home' %></span> <i class="bi bi-chevron-down"></i></a>
             <ul>
                 <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto '%></li>
                 <li><%= link_to "Add visit", new_user_visit_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>

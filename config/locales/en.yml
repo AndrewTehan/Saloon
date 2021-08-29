@@ -30,4 +30,37 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  index:
+    home: "Home"
+    the_best_in_each_of_you: "The best in each of you"
+    the_best_hairdressers: "The best hairdressers"
+    quality_and_service: "Quality and service"
+    price_and_your_time: "Price and your time"
+    frequently_asked_questions: "Frequently Asked Questions"
+    first_question: "Is there parking nearby?"
+    first_answer: "Unfortunately there is no parking nearby."
+    
+    second_question: "Is washing your hair included in the price of a haircut?"
+    second_answer: "Yes, the haircut price includes washing and styling."
+    
+    third_question: "How long does the lamination effect last?"
+    third_answer: "The lamination effect lasts from 3 to 6 weeks. The composition is washed off from the hair gradually, while the repeated procedure is possible before the end of the previous procedure."
+    
+    fourth_question: "How and where can i buy a gift certificate?"
+    fourth_answer: "It is possible to purchase in any of our salons or order the delivery of a certificate"
+  
+  services_page:
+    services: "Services"
+    p_under_services: "Our salon provides a wide range of services for women, men and children at a time convenient for you with care and comfort from highly qualified craftsmen."
+    happy_clients: "Happy Clients"
+    great_service: "Great Service"
+    hours_of_support: "Hours Of Support"
+    hard_workers: "Hard Workers"
+  team_page:
+    team: "Team"
+    p_under_team: "Our friendly team consists of experienced professionals in their field. They are certified participants in international master classes. Winners of prestigious competitions and courses. They will definitely make all your wishes and dreams come true."
+
+
+
+
+
