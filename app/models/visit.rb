@@ -18,6 +18,6 @@ class Visit < ApplicationRecord
   belongs_to :user
   belongs_to :master
 
-  has_many :service_visits
-  has_many :services, through: :service_visits
+  has_one :service_visits
+  has_one :services, through: :service_visits
 end
