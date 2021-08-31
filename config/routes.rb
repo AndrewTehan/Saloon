@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :clients, only: %i[index show destroy edit update ] do
     resources :visits
   end
+
+  get '/admin_index', to: 'visits#admin_index'
   get '/clients', to: 'users#clients'
   get '/team', to: 'users#team'
   put '/change_status' , to: 'visits#change_status'

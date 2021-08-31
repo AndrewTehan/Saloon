@@ -1,21 +1,20 @@
 class VisitsController < ApplicationController
   def index
-    @all_visits = Visit.all
-    @client = Client.find(params[:client_id])
-    @visits = @client.visits
+    @client = current_user
+    @visits = current_user.visits
   end
 
   def admin_index
-    @visits = Visit.all
+    @all_visits = Visit.all
   end
 
   def change_status
     @visit = Visit.find(params[:visit_id])
     case @visit.state
-    when 'sent'
-      @visit.accepted!
-    when 'confirmed'
-      @visit.finished!
+      when 'sent'
+        @visit.accepted!
+      when 'confirmed'
+        @visit.finished!
     end
     redirect_to user_visits_path(current_user)
   end
@@ -37,7 +36,7 @@ class VisitsController < ApplicationController
   end
 
   def edit
-    @client = Client.find_by(id: params[:client_id])
+    @client = current_user
     @visit = Visit.find_by(id: params[:id])
   end
 
@@ -46,18 +45,16 @@ class VisitsController < ApplicationController
     @visit = Visit.find_by(id: params[:id])
     @visit.update(visit_params)
 
-    redirect_to user_visits_path(@client)
+    redirect_to client_visits_path(@client)
   end
 
   def destroy
-    @client = Client.find(params[:client_id])
     @visit = Visit.find(params[:id])
     @visit.destroy
-    redirect_to user_visits_path(@client)
+    redirect_to client_visits_path(current_user)
   end
 
   private
-
   def visit_params
     params.require(:visit).permit(:date, :addition, :master_id, service_visit_attributes: :service_id)
   end

@@ -1,0 +1,57 @@
+<section id="why-us" class="why-us" style="margin-top: 150px">
+  <div class="container">
+    <div class="row">
+      <% if @all_visits.any?%>
+        <div class="row">
+        <%@all_visits.each do |visit|%>
+          <% visit_email = User.find_by(id: visit.client_id).email %>
+          <% master = Master.find_by(id: visit.master_id)%>
+          <div class="col-lg-4">
+            <div class="box" style="text-align: center">
+              <span><%=visit_email%></span>
+              <span><%=visit.order%></span>
+              <p>Date: <%=visit.date.strftime("%H:%m %d/%m/%Y")%> <%= visit.master.full_name%> </p>
+              <div class="row">
+                <div class="col-md-7">
+                  <span>Status:<%=visit.state%></span>
+                </div>
+                <div class="col-md-5">
+                  <%if visit.state != 'done'%>
+                    <span>
+                      <%= link_to "confirm",
+                      change_status_path(visit_id: visit.id),
+                      method: :put,
+                      class: 'text-info'
+                      %>
+                    </span>                    
+                  <%end%> 
+                </div>
+              </div>
+              <p><%=visit.addition%></p>
+              <div class="row">
+                <div class="col-md-6">
+                  <span><%= link_to "Edit",
+                    edit_client_visit_path(@client, id: visit.id),
+                    method: :get,
+                    class: 'col-sm text-info'
+                  %></span>
+                </div>
+                <div class="col-md-6">
+                  <span><%= link_to "Delete",
+                    client_visit_path(@client, visit),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    class: 'col-sm text-info'
+                  %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+        </div>
+      <%else%>
+        <h4>Empty(</h4>
+      <%end%>
+    </div>
+  </div>
+</section>
