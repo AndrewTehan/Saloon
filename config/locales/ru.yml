@@ -1,0 +1,66 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+ru:
+  index:
+    home: "Дои"
+    the_best_in_each_of_you: "Лучшее в каждом из вас"
+    the_best_hairdressers: "Дучщие парикмахеры"
+    quality_and_service: "Качество и сервис"
+    price_and_your_time: "Цена и ваше время"
+    frequently_asked_questions: "Часто задаваемые вопросы"
+    first_question: "Есть ли рядом парковка?"
+    first_answer: "К сожадению, рядом нет парковки."
+    
+    second_question: "Входит ли в цену стрижки мытьё головы?"
+    second_answer: "Да, ценф стрижки включает мытьё и укладку волос."
+    
+    third_question: "Как долго длится эффект ламинирования волос?"
+    third_answer: "Ламинирование держится от 3 до 6 недель. Состав смывается с волос постепенно, при этом повторная процедура возможна до окончания предыдущей."
+    
+    fourth_question: "Как и где я мог бы купить подарочный сертификат?"
+    fourth_answer: "Это возможно в любом из наших салонов или с помощью доставки"
+  
+  services_page:
+    services: "Сервисы"
+    p_under_services: "Our salon provides a wide range of services for women, men and children at a time convenient for you with care and comfort from highly qualified craftsmen."
+    happy_clients: "Счастливые Клиенты"
+    great_service: "Великолепный Сервис"
+    hours_of_support: "Часы поддержки"
+    hard_workers: "Трудолюбивые мастера"
+  team_page:
+    team: "Команда"
+    p_under_team: "Наша дружная команда состоит из опытных профессианалов в своей сфере. Они сертифицированные участники международных мастер-классов. Победители престижных соревнований и курсов. Они обязательно воплотят в жизнь все ваши желания и мечты."
+
+
+
+
+

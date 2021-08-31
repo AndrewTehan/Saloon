@@ -1,135 +1,82 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<header id="header" class="fixed-top ">
+  <div class="container d-flex align-items-center justify-content-between">
+  
+    <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
+    <nav id="navbar" class="navbar">
+      <ul>
+          <li class="dropdown"><a href="#"><span>Home</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto '%></li>
+              <li><%= link_to "Add visit", new_user_visit_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
+              <%if @current_user.is_a?(Admin)%>
+                <li><%= link_to "All visits", user_visits_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
+                <li><%= link_to "Clients list", clients_path(), method: :get, class: 'nav-link scrollto ' %></li>
+              <%else%>
+                <li><%= link_to "My visits", user_visits_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
+              <%end%>
+            </ul>
+          </li>
+          <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
+          <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
+          <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
+          <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
+              <li><%= link_to "Edit", edit_user_path(current_user, id: current_user.id), method: :get, class: 'nav-link scrollto' %></li>
+              <li><%= link_to "Delete", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
+            </ul>
+          </li>
+        </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>
 
-<style>
-.form-group{
-  margin-bottom: 15px;
-}
-label{
-  margin-bottom: 15px;
-}
-input,
-input::-webkit-input-placeholder {
-  font-size: 11px;
-  padding-top: 3px;
-}
-.form-control {
-  height: auto!important;
-  padding: 8px 12px !important;
-}
-.input-group {
-  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
-}
-#button {
-  border: 1px solid #ccc;
-  margin-top: 28px;
-  padding: 6px 12px;
-  color: #666;
-  text-shadow: 0 1px #fff;
-  cursor: pointer;
-  border-radius: 3px 3px;
-  box-shadow: 0 1px #fff inset, 0 1px #ddd;
-  background: #f5f5f5;
-  background: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f5f5), color-stop(100%, #eeeeee));
-  background: -webkit-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: -o-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: -ms-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background: linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0);
-}
-.main-form{
-  margin-top: 30px;
-  margin: 0 auto;
-  max-width: 400px;
-  padding: 10px 40px;
-  background:#009edf;
-  color: #FFF;
-  text-shadow: none;
-  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-}
-span.input-group-addon i {
-  color: #009edf;
-  font-size: 17px;
-}
-.login-button{
-  margin-top: 5px;
-}
-body{
-    background: #271465;
-}
-</style>
-<body>
-<div class="container">
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><h1 style="color: white">Edit user</h1></li>
-    </ul>
-    
-    <div class="col-md-3 text-end">
-        <span class="btn btn-outline-primary me-2"><%= link_to "Back", users_path, method: :get %></span>
+<section id="visit" class="visit section-bg" style="margin-top: 150px">
+  <div class="container">
+    <div class="section-title">
+      <h2>Edit Account</h2>
     </div>
-  </header>
-</div>
-<div class="container">
-  <div class="row main-form">
-    <%= form_with url: user_path(@user), method: :put, model: @user do |form| %>
-
-      <div class="form-group">
-        <label class="cols-sm-2 control-label">First name</label>
-        <div class="cols-sm-10">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+    <div class="col-lg-12">
+      <%= form_with url: user_path(@user), class: "php-email-form", method: :put, model: @user do |form| %>
+        <div class="row">
+          <div class="col-md-6 form-group">
             <%= form.text_field :first_name, class: "form-control" %>
-              <% @user.errors.full_messages_for(:first_name).each do |message| %>
+            <% @user.errors.full_messages_for(:first_name).each do |message| %>
               <div><%= message %></div>
             <% end %>
           </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="cols-sm-2 control-label">Last name</label>
-        <div class="cols-sm-10">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+          <div class="col-md-6 form-group">
             <%= form.text_field :last_name, class: "form-control" %>
             <% @user.errors.full_messages_for(:last_name).each do |message| %>
               <div><%= message %></div>
             <% end %>
           </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label class="cols-sm-2 control-label">Email</label>
-        <div class="cols-sm-10">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+        <div class="row">
+          <div class="col-md-6 form-group">
             <%= form.email_field :email, class: 'form-control' %>   
             <% @user.errors.full_messages_for(:email).each do |message| %>
               <div><%= message %></div>
             <% end %> 
           </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="cols-sm-2 control-label">Phone</label>
-        <div class="cols-sm-10">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></span>
-            <%= form.text_field :phone_number, class: "form-control" %>
-          </div>
-            <% @user.errors.full_messages_for(:phone_number).each do |message| %>
-            <div><%= message %></div>
-          <% end %>
-        </div>
-      </div>
 
-      <div class="form-group ">
-        <input type="submit" name="commit" value="Update User" class="btn btn-primary btn-lg btn-block login-button" data-disable-with="Update User" />
-      </div>
-    <% end %>
+          <div class="col-md-6 form-group">
+            <%= form.text_field :phone_number, class: "form-control" %>
+            <% @user.errors.full_messages_for(:phone_number).each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="my-3">
+          <div class="loading">Loading</div>
+          <div class="error-message"></div>
+          <div class="sent-message">Your message has been sent. Thank you!</div>
+        </div>
+        <div class="text-center"><button type="submit">Edit</button></div>
+      <% end %>
+    </div>
   </div>
-</div>
-</body>
+</section>

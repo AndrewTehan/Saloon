@@ -4,7 +4,7 @@
       <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="dropdown"><a href="#"><span>Home</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span><%= t 'index.home' %></span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto '%></li>
               <li><%= link_to "Add visit", new_user_visit_path(@user), method: :get, class: 'nav-link scrollto ' %></li>
@@ -38,11 +38,11 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>The best in each of you</h1>
+          <h1><%= t 'index.the_best_in_each_of_you' %></h1>
           <ul>
-            <li><i class="ri-check-line"></i> The best hairdressers</li>
-            <li><i class="ri-check-line"></i> Quality and service</li>
-            <li><i class="ri-check-line"></i> Price and your time</li>
+            <li><i class="ri-check-line"></i><%= t 'index.the_best_hairdressers'%></li>
+            <li><i class="ri-check-line"></i><%= t 'index.quality_and_service'%></li>
+            <li><i class="ri-check-line"></i><%= t 'index.price_and_your_time'%></li>
           </ul>
           <div class="mt-3">
             <span class="btn-get-started scrollto"><%= link_to "Add visit", new_user_visit_path(@user), method: :get, class: 'text-white' %></span>
@@ -68,44 +68,37 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Frequently Asked Questions</h2>
+          <h2><%= t 'index.frequently_asked_questions'%></h2>
         </div>
 
         <ul class="faq-list">
 
           <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Is there parking nearby? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1"><%= t 'index.first_question'%> <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Unfortunately there is no parking nearby.
-              </p>
+              <p><%= t 'index.first_answer'%></p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Is washing your hair included in the price of a haircut? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question"><%= t 'index.second_question'%><i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq2" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Yes, the haircut price includes washing and styling.
+              <p><%= t 'index.second_answer'%>             
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">How long does the lamination effect last? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question"><%= t 'index.third_question'%> <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq3" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                The lamination effect lasts from 3 to 6 weeks. The composition is washed off from the hair gradually, while the repeated procedure is possible before the end of the previous procedure.
-              </p>
+              <p><%= t 'index.third_answer'%></p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">How and where can i buy a gift certificate? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question"><%= t 'index.fourth_question'%><i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq4" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                It is possible to purchase in any of our salons or order the delivery of a certificate
-              </p>
+              <p><%= t 'index.fourth_answer'%></p>
             </div>
           </li>
         </ul>

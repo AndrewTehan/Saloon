@@ -3,7 +3,7 @@
     <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
     <nav id="navbar" class="navbar">
         <ul>
-          <li class="dropdown"><a href="#"><span>Home</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span><%= t 'index.home' %></span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto '%></li>
               <li><%= link_to "Add visit", new_user_visit_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
@@ -34,19 +34,16 @@
 <!-- ======= Services Section ======= -->
 <section id="services" class="services" style="margin-top: 50px">
   <div class="container">
-
     <div class="section-title">
-      <h2>Services</h2>
-      <p>Our salon provides a wide range of services for women, men and children at a time convenient for you with care and comfort from highly qualified craftsmen.</p>
+      <h2><%= t 'services_page.services'%></h2>
+      <p><%= t 'services_page.p_under_services'%></p>
     </div>
-
   </div>
 </section><!-- End Services Section -->
 
 <!-- ======= Features Section ======= -->
 <section id="features" class="features">
   <div class="container">
-
     <div class="row">
       <% @services.each do |service|%>
         <div class="col-lg-3 col-md-4">
@@ -62,14 +59,12 @@
 
 <section id="counts" class="counts section-bg">
   <div class="container">
-
     <div class="row">
-
       <div class="col-lg-3 col-md-6">
         <div class="count-box">
           <i class="bi bi-emoji-smile"></i>
           <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Happy Clients</p>
+          <p><%= t 'services_page.happy_clients'%></p>
         </div>
       </div>
 
@@ -77,7 +72,7 @@
         <div class="count-box">
           <i class="bi bi-journal-richtext"></i>
           <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Great Service</p>
+          <p><%= t 'services_page.great_service'%></p>
         </div>
       </div>
 
@@ -85,7 +80,7 @@
         <div class="count-box">
           <i class="bi bi-headset"></i>
           <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Hours Of Support</p>
+          <p><%= t 'services_page.hours_of_support'%></p>
         </div>
       </div>
 
@@ -93,11 +88,9 @@
         <div class="count-box">
           <i class="bi bi-people"></i>
           <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Hard Workers</p>
+          <p><%= t 'services_page.hard_workers'%></p>
         </div>
       </div>
-
     </div>
-
   </div>
 </section><!-- End Counts Section -->
