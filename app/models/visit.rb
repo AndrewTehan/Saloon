@@ -22,4 +22,10 @@ class Visit < ApplicationRecord
   has_one :service, through: :service_visit
 
   accepts_nested_attributes_for :service_visit
+
+  validate :support_service
+
+  def support_service
+    errors.add(:service, "isn't supported by selected master") unless master.services.include?(service_visit.service)
+  end
 end
