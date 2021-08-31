@@ -1,13 +1,47 @@
-# frozen_string_literal: true
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-#Admin.create(first_name: 'Saloon', last_name: 'Official', email: 'saloonofficial699@gmail.com', phone_number: '+375442504040', type: 'Admin', password: '111111' )
-Visit.create(date: '', addition: '', order: 'coloting', master: '')
-#User.create(first_name: 'Andrew', last_name: 'Tehanov', email: 'andrewtehanov@gmail.com', phone_number: '+375447756860', type: 'User', password: '111111' )
-# Team.create(first_name: "Amanda", last_name: "Jepson", email: "jepson@gmail.com", phone_number: "+375440000001", password: "11111111")
-# Team.create(first_name: "Sarah", last_name: "Jhonson", email: "jhonson@gmail.com", phone_number: "+375440000021", password: "11111111")
+admin = Admin.create(first_name: 'Saloon', last_name: 'Official', email: 'saloonofficial699@gmail.com', phone_number: '+375442504040', password: '111111' ) 
+client = Client.create(first_name: 'Andrew', last_name: 'Tehanov', email: 'andrewtehanov@gmail.com', phone_number: '+375447756860', password: '111111' ) 
+
+User.all.each(&:confirm)
+service_prices = [["Coloring", "30"],
+ ["Men haircut", "15"],
+ ["Women short haircut", "20"],
+ ["Women long haircut", "25"],
+ ["Gray Cammuffling", "10"],
+ ["Children's Haircuts", "10"],
+ ["Mustache and Beard Haircut", "13"],
+ ["Highlighting", "28"],
+ ["Lamination", "45"],
+ ["Toning", "24"],
+ ["Balayazh", "27"],
+ ["Eyebrow Correction", "17"],
+ ["Eyebrow & Eyelash Tint", "19"]]
+
+services = service_prices.map do |(name, cost)|
+  service = Service.create(master_service: name, cost: cost)
+end
+
+master1_services_attributes = services.first(6).map do |service|
+  {service_id: service.id}
+end
+
+master2_services_attributes = services.last(6).map do |service|
+  {service_id: service.id}  
+end
+
+master1 = Master.create(
+  first_name: 'Sarah',
+  last_name: "O'nil",
+  email: 'sarah@gmail.com',
+  phone_number: '+375442504111',
+  password: '111111',
+  master_services_attributes: master1_services_attributes
+)
+
+master2 = Master.create(
+  first_name: 'Bob',
+  last_name: "Bob",
+  email: 'bob@gmail.com',
+  phone_number: '+375442504222',
+  password: '111111',
+  master_services_attributes: master2_services_attributes
+) 

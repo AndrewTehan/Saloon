@@ -1,7 +1,7 @@
 class Visit < ApplicationRecord
   include AASM
 
-  aasm :column => 'state' do
+  aasm column: 'state' do
     state :sent, initial: true
     state :confirmed
     state :done
@@ -15,9 +15,21 @@ class Visit < ApplicationRecord
     end
   end
 
-  belongs_to :user
+  belongs_to :client
   belongs_to :master
 
-  has_many :service_visits
-  has_many :services, through: :service_visits
+  has_one :service_visit, dependent: :destroy
+  has_one :service, through: :service_visit
+
+  accepts_nested_attributes_for :service_visit
+
+  validate :support_service, :check_date
+
+  def support_service
+    errors.add(:service, "isn't supported by selected master") unless master.services.include?(service_visit.service)
+  end
+
+  def check_date
+    errors.add(:date, "must be in future") if date < Time.now
+  end
 end

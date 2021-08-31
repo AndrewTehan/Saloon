@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_120405) do
+ActiveRecord::Schema.define(version: 2021_08_29_143114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,15 +20,6 @@ ActiveRecord::Schema.define(version: 2021_08_27_120405) do
     t.integer "master_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "masters", force: :cascade do |t|
-    t.string "name"
-    t.string "master_email"
-    t.string "phone_number"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "rank"
   end
 
   create_table "service_visits", force: :cascade do |t|
@@ -66,20 +57,19 @@ ActiveRecord::Schema.define(version: 2021_08_27_120405) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.string "date"
     t.string "order"
     t.string "addition"
-    t.bigint "user_id", null: false
+    t.bigint "client_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "state", default: "sent", null: false
     t.bigint "master_id", null: false
-    t.index ["user_id"], name: "index_visits_on_user_id"
+    t.datetime "date"
+    t.index ["client_id"], name: "index_visits_on_client_id"
   end
 
-  add_foreign_key "master_services", "masters"
   add_foreign_key "master_services", "services"
   add_foreign_key "service_visits", "services"
   add_foreign_key "service_visits", "visits"
-  add_foreign_key "visits", "users"
+  add_foreign_key "visits", "users", column: "client_id"
 end

@@ -1,133 +1,42 @@
-<header id="header" class="fixed-top ">
-  <div class="container d-flex align-items-center justify-content-between">
-    <h1><%= link_to "SALON", root_path, method: :get, class: 'nav-link scrollto '%></h1>
-    <nav id="navbar" class="navbar">
-      <ul>
-          <li class="dropdown"><a href="#"><span>Home</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><%= link_to "Home", root_path, method: :get, class: 'nav-link scrollto '%></li>
-              <li><%= link_to "Add visit", new_user_visit_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
-              <%if @current_user.is_a?(Admin)%>
-                <li><%= link_to "All visits", user_visits_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
-                <li><%= link_to "Clients list", clients_path(), method: :get, class: 'nav-link scrollto ' %></li>
-              <%else%>
-                <li><%= link_to "My visits", user_visits_path(@current_user), method: :get, class: 'nav-link scrollto ' %></li>
-              <%end%>
-            </ul>
-          </li>
-          <li><%= link_to "Services", services_path, method: :get, class: 'nav-link scrollto '%></li>
-          <li><%= link_to "Portfolio", portfolio_path, method: :get, class: 'nav-link scrollto '%></li>
-          <li><%= link_to "Team", team_path, method: :get, class: 'nav-link scrollto '%></li>
-          <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
-              <li><%= link_to "Edit", edit_user_path(current_user, id: current_user.id), method: :get, class: 'nav-link scrollto' %></li>
-              <li><%= link_to "Delete", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
-            </ul>
-          </li>
-        </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav>
-  </div>
-</header>
-
 <section id="why-us" class="why-us" style="margin-top: 150px">
-  <%if current_user.is_a?(Admin)%>
-    <div class="container">
-      <div class="row">
-        <% if @all_visits.any?%>
-          <div class="row">
-          <%@all_visits.each do |visit|%>
-            <% visit_email = User.find_by(id: visit.user_id).email %>
-            <% master = Master.find_by(id: visit.master_id)%>
-            <div class="col-lg-4">
-              <div class="box" style="text-align: center">
-                <span><%=visit_email%></span>
+  <div class="container">
+    <div class="row">
+      <%if @visits.any?%>
+        <%@visits.each do |visit|%>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="box">
                 <span><%=visit.order%></span>
-                <p>Date: <%=visit.date[0 ,9]%> <%=visit.date[11 , 15]%>, Master - ???</p>
-                <div class="row">
-                  <div class="col-md-7">
-                    <span>Status:<%=visit.state%></span>
-                  </div>
-                  <div class="col-md-5">
-                    <%if visit.state != 'done'%>
-                      <span>
-                        <%= link_to "confirm",
-                        change_status_path(visit_id: visit.id),
-                        method: :put,
-                        class: 'text-info'
-                        %>
-                      </span>                    
-                    <%end%> 
-                  </div>
-                </div>
+                <span>Status: <%=visit.state%> Cost: цена$</span>
+                <p>Date: <%=visit.date.strftime("%H:%m %d/%m/%Y")%></p>
                 <p><%=visit.addition%></p>
+                
                 <div class="row">
-                  <div class="col-md-6">
-                    <span><%= link_to "Edit",
-                      edit_user_visit_path(@user, id: visit.id),
-                      method: :get,
-                      class: 'col-sm text-info'
-                    %></span>
-                  </div>
-                  <div class="col-md-6">
-                    <span><%= link_to "Delete",
-                      user_visit_path(@user, visit),
-                      method: :delete,
-                      data: { confirm: "Are you sure?" },
-                      class: 'col-sm text-info'
-                    %></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <%end%>
-          </div>
-        <%else%>
-          <h4>Empty(</h4>
-        <%end%>
-      </div>
-    </div>
-  <%else%>
-    <div class="container">
-      <div class="row">
-        <%if @visits.any?%>
-          <%@visits.each do |visit|%>
-            <div class="col-lg-4">
-              <div class="row">
-                <div class="box">
-                  <span><%=visit.order%></span>
-                  <span>Status: <%=visit.state%> Cost: цена$</span>
-                  <p>Date: <%=visit.date[0 ,9]%> <%=visit.date[11 , 15]%></p>
-                  <p><%=visit.addition%></p>
-                  
-                  <div class="row">
-                    <%if visit.state == "sent" %>
-                      <div class="col-md-6">
-                        <%= link_to "Edit",
-                          edit_user_visit_path(@user, id: visit.id),
-                          method: :get,
-                          class: 'col-sm text-info'
-                        %>
-                      </div>
-                    <%end%>
+                  <%if visit.state == "sent" %>
                     <div class="col-md-6">
-                      <%= link_to "Delete",
-                        user_visit_path(@user, visit),
-                        method: :delete,
-                        data: { confirm: "Are you sure?" },
+                      <%= link_to "Edit",
+                        edit_client_visit_path(@client, id: visit.id),
+                        method: :get,
                         class: 'col-sm text-info'
                       %>
                     </div>
+                  <%end%>
+                  <div class="col-md-6">
+                    <%= link_to "Delete",
+                      client_visit_path(@client, visit),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" },
+                      class: 'col-sm text-info'
+                    %>
                   </div>
                 </div>
-              </div>            
-            </div>        
-          <%end%>
-        <%else%>
-          <h4>Empty(</h4>
+              </div>
+            </div>            
+          </div>        
         <%end%>
-      </div>
+      <%else%>
+        <h4>Empty(</h4>
+      <%end%>
     </div>
-  <%end%>
+  </div>
 </section>
