@@ -38,6 +38,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'mailcatcher' 
   gem 'bootstrap', '~> 5.0.1'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'

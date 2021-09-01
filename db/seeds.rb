@@ -1,5 +1,15 @@
-admin = Admin.create(first_name: 'Saloon', last_name: 'Official', email: 'saloonofficial699@gmail.com', phone_number: '+375442504040', password: '111111' ) 
-client = Client.create(first_name: 'Andrew', last_name: 'Tehanov', email: 'andrewtehanov@gmail.com', phone_number: '+375447756860', password: '111111' ) 
+def create_user_attributes(first_name: nil, last_name: nil, email: nil, phone_number: nil, password: "111111")
+  {
+    first_name: first_name || Faker::Name.unique.first_name,
+    last_name: last_name || Faker::Name.unique.last_name,
+    email: email || Faker::Internet.unique.emai,
+    phone_number: phone_number || Faker::PhoneNumber.cell_phone_in_e164,
+    password: password
+  }
+end
+
+admin = Admin.create(**create_user_attributes()) 
+client = Client.create(**create_user_attributes(first_name: 'Andrew', last_name: 'Tehanov', email: 'andrewtehanov@gmail.com', phone_number: '+375447756860')) 
 
 User.all.each(&:confirm)
 service_prices = [["Coloring", "30"],
@@ -17,31 +27,16 @@ service_prices = [["Coloring", "30"],
  ["Eyebrow & Eyelash Tint", "19"]]
 
 services = service_prices.map do |(name, cost)|
-  service = Service.create(master_service: name, cost: cost)
+  Service.create(master_service: name, cost: cost)
 end
 
-master1_services_attributes = services.first(6).map do |service|
-  {service_id: service.id}
+services.each_slice(6) do |master_services|
+  master_services_attributes = master_services.map do |service|
+    {service_id: service.id}
+  end
+
+  master = Master.create(
+    **create_user_attributes(),
+    master_services_attributes: master_services_attributes
+  )
 end
-
-master2_services_attributes = services.last(6).map do |service|
-  {service_id: service.id}  
-end
-
-master1 = Master.create(
-  first_name: 'Sarah',
-  last_name: "O'nil",
-  email: 'sarah@gmail.com',
-  phone_number: '+375442504111',
-  password: '111111',
-  master_services_attributes: master1_services_attributes
-)
-
-master2 = Master.create(
-  first_name: 'Bob',
-  last_name: "Bob",
-  email: 'bob@gmail.com',
-  phone_number: '+375442504222',
-  password: '111111',
-  master_services_attributes: master2_services_attributes
-) 

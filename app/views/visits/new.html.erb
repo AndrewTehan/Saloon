@@ -1,8 +1,8 @@
  <section id="visit" class="visit section-bg" style="margin-top: 150px">
   <div class="container">
     <div class="section-title">
-      <h2>Visit</h2>
-      <p>Send a request to visit the salon to our administration. You will receive an answer shortly.</p>
+      <h2><%= t "visit_new.visit"%></h2>
+      <p><%= t "visit_new.p_under_h2"%></p>
     </div>
     <div>
       <div class="col-lg-12">
@@ -29,12 +29,11 @@
             </div>
             <div class="col-md-3 form-group">
               <%= form.collection_select "service_visit_attributes[service_id]", Service.all, :id, :master_service, {},  {class: "form-select", aria_label: "Default select example", required: true }%>
-              
             </div>
           </div>
 
           <div class="form-group mt-3">
-            <%= form.text_area :addition, class: "form-control", placeholder: "If you want enter your wishes or preferred master" %>
+            <%= form.text_area :addition, class: "form-control", placeholder: t("visit_new.placeholder") %>
           </div>
 
           <div class="my-3">
@@ -42,7 +41,7 @@
             <div class="error-message"></div>
             <div class="sent-message">Your message has been sent. Thank you!</div>
           </div>
-          <div class="text-center"><button type="submit">Send Message</button></div>
+          <div class="text-center"><button type="submit"><%= t "visit_new.send_button"%></button></div>
         <% end %>
       </div>
     </div>

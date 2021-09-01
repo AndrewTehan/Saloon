@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
   index:
     home: "Home"
@@ -48,6 +17,9 @@ en:
     
     fourth_question: "How and where can i buy a gift certificate?"
     fourth_answer: "It is possible to purchase in any of our salons or order the delivery of a certificate"
+    add_visit: "Add visit"
+    my_visits: "My visits"
+    all_visits: "All visits"
   
   services_page:
     services: "Services"
@@ -59,6 +31,29 @@ en:
   team_page:
     team: "Team"
     p_under_team: "Our friendly team consists of experienced professionals in their field. They are certified participants in international master classes. Winners of prestigious competitions and courses. They will definitely make all your wishes and dreams come true."
+  header:
+    SALON: "SALON"
+    add_visit: "Add visit"
+    my_visits: "My visits"
+    all_visits: "All visits"
+    clients_list: "Clients list"
+    services: "Services"
+    portfolio: "Portfolio"
+    team: "Team"
+    sign_out: "Sign out"
+    edit: "Edit"
+    delete: "Delete"
+    visits_drop: "Visits"
+    account_drop: "Account"
+  visit_new:
+    visit: "Visit"
+    p_under_h2: "Send a request to visit the salon to our administration. You will receive an answer shortly."
+    placeholder: "If you want enter your wishes or preferred master"
+    send_button: "Send visit"
+    send_button: "Send visit"
+  edit_visit:
+    edit_visit: "Edit Visit"
+    edit_button: "Edit"
 
 
 
