@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = find_user()
+    @user = current_user
     redirect_to users_path unless @user == current_user || current_user.is_a?(Admin)
   end
 

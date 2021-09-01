@@ -10,14 +10,16 @@
             <li><i class="ri-check-line"></i><%= t 'index.quality_and_service'%></li>
             <li><i class="ri-check-line"></i><%= t 'index.price_and_your_time'%></li>
           </ul>
-          <div class="mt-3">
-            <span class="btn-get-started scrollto"><%= link_to "Add visit", new_client_visit_path(current_user), method: :get, class: 'text-white' %></span>
-            <%if current_user.is_a?(Admin)%>
-              <span class="btn-get-started scrollto"><%= link_to "All visits", client_visits_path(current_user), method: :get, class: 'text-white'%></span>
-            <%else%>
-              <span class="btn-get-started scrollto"><%= link_to "My visits", client_visits_path(current_user), method: :get, class: 'text-white' %></span>
-            <%end%>
-          </div>
+          <%if current_user%>
+            <div class="mt-3">
+              <span class="btn-get-started scrollto"><%= link_to t("index.add_visit"), new_client_visit_path(current_user), method: :get, class: 'text-white' %></span>
+              <%if current_user.is_a?(Admin)%>
+                <span class="btn-get-started scrollto"><%= link_to t("index.all_visits"), client_visits_path(current_user), method: :get, class: 'text-white'%></span>
+              <%else%>
+                <span class="btn-get-started scrollto"><%= link_to t("index.my_visits"), client_visits_path(current_user), method: :get, class: 'text-white' %></span>
+              <%end%>
+            </div>
+          <%end%>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
           <img src="assets/theme/img/hero-img.jpg" class="img-fluid" alt="">
