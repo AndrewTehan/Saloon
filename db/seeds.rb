@@ -40,4 +40,3 @@ services.each_slice(6) do |master_services|
     master_services_attributes: master_services_attributes
   )
 end
-
