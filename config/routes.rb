@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   scope ":locale", locale: /en|ru/ do
-    root 'users#index', locale: :ru
+    root 'users#index', locale: :en
     devise_for :users
 
     resources :clients, controller: :users, only: %i[index show] do

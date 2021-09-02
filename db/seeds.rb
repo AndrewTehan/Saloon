@@ -2,7 +2,7 @@ def create_user_attributes(first_name: nil, last_name: nil, email: nil, phone_nu
   {
     first_name: first_name || Faker::Name.unique.first_name,
     last_name: last_name || Faker::Name.unique.last_name,
-    email: email || Faker::Internet.unique.emai,
+    email: email || Faker::Internet.unique.email,
     phone_number: phone_number || Faker::PhoneNumber.cell_phone_in_e164,
     password: password
   }
