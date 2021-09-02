@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if current_user.is_a?(Admin) || current_user == @user
       reset_session if current_user == @user
       @user.destroy
-      redirect_to :users
+      redirect_to :user
     end
   end
 
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   def update    
     @user = find_user()
     if @user.update user_params
-      redirect_to users_path
+      redirect_to :root
     else
       render :edit
     end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(@user.is_a?(Admin) ? :admin : :user).permit(:first_name, :last_name, :email, :phone_number)
+    params.require(@user.is_a?(Admin) ? :admin : :client).permit(:first_name, :last_name, :email, :phone_number)
   end
 
 end

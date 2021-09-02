@@ -1,15 +1,15 @@
 <section id="why-us" class="why-us" style="margin-top: 150px">
-    <div class="container">
-        <div class="row">
-					<%@clients.each do |client|%>
-							<div class="col-lg-4">
-									<div class="box" style="text-align: center">
-											<span><%=client.first_name%> <%=client.last_name%></span>
-												<p><%=client.email%></p>
-											<span><%=client.phone_number%></span>
-									</div>
-							</div>
-					<%end%>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+			<%@clients.each do |client|%>
+				<div class="col-lg-4">
+					<div class="box" style="text-align: center">
+						<span><%=client.first_name%> <%=client.last_name%></span>
+							<p><%=client.email%></p>
+						<span><%=client.phone_number%></span>
+					</div>
+				</div>
+			<%end%>
+		</div>
+	</div>
 </section>

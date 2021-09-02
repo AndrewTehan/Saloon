@@ -70,7 +70,7 @@
                   <ul>
                     <li><%= link_to t("header.sign_out"), destroy_user_session_path, method: :delete, class: 'nav-link scrollto' %></li>
                     <li><%= link_to t("header.edit"), edit_user_path(current_user), method: :get, class: 'nav-link scrollto' %></li>
-                    <li><%= link_to t("header.delete"), client_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
+                    <li><%= link_to t("header.delete"), user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link scrollto' %></li>
                     <a href=<%= url_for(locale: I18n.locale == :en ? :ru : :en)%>><%= t("header.lang") %></a>
                   </ul>
                 </li>
