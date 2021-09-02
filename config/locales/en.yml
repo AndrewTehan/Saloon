@@ -45,6 +45,7 @@ en:
     delete: "Delete"
     visits_drop: "Visits"
     account_drop: "Account"
+    lang: "Translate"
   visit_new:
     visit: "Visit"
     p_under_h2: "Send a request to visit the salon to our administration. You will receive an answer shortly."

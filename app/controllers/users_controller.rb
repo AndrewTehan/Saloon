@@ -11,10 +11,6 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def clients
-    @clients = User.all
-  end
-
   def destroy
     @user = find_user()
     return redirect_to :users unless @user
@@ -45,6 +41,11 @@ class UsersController < ApplicationController
 
   def services
     @services = Service.all
+  end
+
+
+  def clients
+    @clients = User.all
   end
 
   private
