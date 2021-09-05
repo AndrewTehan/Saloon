@@ -5,5 +5,5 @@ class Service < ApplicationRecord
   has_many :master_services, dependent: :destroy
   has_many :masters, through: :master_services
 
-  validates_uniqueness_of :master_service
+  validates_uniqueness_of :service_name
 end

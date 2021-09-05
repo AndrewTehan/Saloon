@@ -27,7 +27,7 @@ service_prices = [["Coloring", "30"],
  ["Eyebrow & Eyelash Tint", "19"]]
 
 services = service_prices.map do |(name, cost)|
-  Service.create(master_service: name, cost: cost)
+  Service.create(service_name: name, cost: cost)
 end
 
 services.each_slice(6) do |master_services|

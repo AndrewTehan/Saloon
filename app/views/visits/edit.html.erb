@@ -27,8 +27,8 @@
           <div class="form-group mt-3">
             <select class="form-select" aria-label="Default select example" name="visit[order]" id="orders" required="true">
               <% Service.all.each do |s| %>
-                <option value=<%= s.master_service %>>
-                  <%= s.master_service %> - <%= s.cost %> $
+                <option value=<%= s.service_name %>>
+                  <%= s.service_name %> - <%= s.cost %> $
                 </option>
               <% end %>
             </select>
