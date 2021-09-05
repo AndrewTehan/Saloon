@@ -9,8 +9,8 @@ FactoryBot.define do
     end
 
     trait :women_haircut do
-      service_name { "Women Haircut" }
-      cost { 30 }
+      service_name { "Women short haircut" }
+      cost { 20 }
     end
   end
 end
