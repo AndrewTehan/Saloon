@@ -9,10 +9,6 @@ class Master < User
 
   accepts_nested_attributes_for :master_services
 
-  def confirmation_required?
-    false
-  end
-
   validate :any_skills
 
   def any_skills
