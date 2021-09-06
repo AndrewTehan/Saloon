@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Master < User
   has_many :visits
   has_many :users, through: :visits

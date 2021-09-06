@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Visit < ApplicationRecord
   include AASM
 
@@ -30,6 +32,6 @@ class Visit < ApplicationRecord
   end
 
   def check_date
-    errors.add(:date, "must be in future") if date < Time.now
+    errors.add(:date, 'must be in future') if date < Time.now
   end
 end

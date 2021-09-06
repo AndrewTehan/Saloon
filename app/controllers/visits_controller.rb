@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VisitsController < ApplicationController
   def index
     @client = current_user
@@ -11,10 +13,10 @@ class VisitsController < ApplicationController
   def change_status
     @visit = Visit.find(params[:visit_id])
     case @visit.state
-      when 'sent'
-        @visit.accepted!
-      when 'confirmed'
-        @visit.finished!
+    when 'sent'
+      @visit.accepted!
+    when 'confirmed'
+      @visit.finished!
     end
     redirect_to user_visits_path(current_user)
   end
@@ -31,7 +33,7 @@ class VisitsController < ApplicationController
       @visit.save
       redirect_to client_visits_path(current_user)
     else
-      redirect_to new_client_visit_path(current_user), flash: {errors: @visit.errors.full_messages}
+      redirect_to new_client_visit_path(current_user), flash: { errors: @visit.errors.full_messages }
     end
   end
 
@@ -55,6 +57,7 @@ class VisitsController < ApplicationController
   end
 
   private
+
   def visit_params
     params.require(:visit).permit(:date, :addition, :master_id, service_visit_attributes: :service_id)
   end

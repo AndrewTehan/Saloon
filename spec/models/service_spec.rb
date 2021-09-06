@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Service, type: :model do
-
   test_service = FactoryBot.create(:service)
 
   it "cost shouldn't be less then 0" do

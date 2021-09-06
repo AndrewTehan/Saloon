@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-test_client = Client.find_by(email: 'andrewtehanov@gmail.com' )
+  test_client = Client.find_by(email: 'andrewtehanov@gmail.com')
 
   factory :visit do
     addition { Faker::String.random(length: 4) }
