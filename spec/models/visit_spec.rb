@@ -3,25 +3,53 @@
 require 'rails_helper'
 
 RSpec.describe Visit, type: :model do
-  test_visit = FactoryBot.create(:visit)
 
-  it "date shouldn't be in past by validation" do
-    expect(test_visit).to be_valid
+  shared_examples "Raises validation error" do
+    it "will raise validation error" do
+      expect{ visit }.to raise_error(ActiveRecord::RecordInvalid)
+    end
   end
 
-  it "date shouldn't be in past" do
-    expect(test_visit.date).to be > test_visit.created_at
+  describe "visit_factory" do
+    let(:visit){ FactoryBot.create(:visit) }
+
+    it "should be valid" do
+      expect(visit).to be_valid
+    end
+
+    it "shouldn't be in the past" do
+      expect(visit.date).to be > visit.created_at
+    end
+
+    it 'should has master' do
+      expect(visit.master).to exist
+    end
+
+    it 'should has service' do
+      expect(visit.service).to exist
+    end
+
+    it 'should has master which has service skill' do
+      expect(visit.master.services).to include visit.service
+    end
+
+    it "should contain a record with master & service id" do
+      expect(visit.service.id).to include ServiceVisit.find_by(visit_id: visit).visit_id
+    end
   end
 
-  it 'it should has master' do
-    expect(test_visit.master).to be
+  context "with invalid service" do
+    let(:master){ FactoryBot.create(:master, :men_haircut) }
+    let(:service){ FactoryBot.create(:service, :women_haircut) }
+    let(:visit){ FactoryBot.create(:visit, service_id: service.id, master: master) }
+
+    include_examples "Raises validation error"
   end
 
-  it 'it should has service' do
-    expect(test_visit.service).to be
-  end
+  context "with invalid date" do
+    let(:date){ 10.days.ago }
+    let(:visit){ FactoryBot.create(:visit, :women_haircut, date: date) }
 
-  it 'it should has master which has service skill' do
-    expect(test_visit.master.services).to include test_visit.service
+    include_examples "Raises validation error"
   end
 end
