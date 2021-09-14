@@ -30,14 +30,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <span><%= link_to "Edit",
-                    edit_client_visit_path(@client, id: visit.id),
+                    edit_client_visit_path(visit.client, id: visit.id),
                     method: :get,
                     class: 'col-sm text-info'
                   %></span>
                 </div>
                 <div class="col-md-6">
                   <span><%= link_to "Delete",
-                    client_visit_path(@client, visit),
+                    client_visit_path(visit.client, id: visit.id),
                     method: :delete,
                     data: { confirm: "Are you sure?" },
                     class: 'col-sm text-info'

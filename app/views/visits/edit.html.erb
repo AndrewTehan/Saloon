@@ -28,7 +28,7 @@
             <select class="form-select" aria-label="Default select example" name="visit[order]" id="orders" required="true">
               <% Service.all.each do |s| %>
                 <option value=<%= s.service_name %>>
-                  <%= s.service_name %> - <%= s.cost %> $
+                  <%= s.service_name %> - <%= s.price %> $
                 </option>
               <% end %>
             </select>
