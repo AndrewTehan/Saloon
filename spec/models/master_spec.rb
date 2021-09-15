@@ -3,29 +3,44 @@
 require 'rails_helper'
 
 RSpec.describe Master, type: :model do
-  test_master = FactoryBot.create(:master)
-
-  it 'is valid with valid attributes' do
-    expect(test_master).to be_valid
+  shared_examples "Raises not null violation error" do
+    it "will raise not null violation error" do
+      expect{ master }.to raise_error(ActiveRecord::NotNullViolation)
+    end
   end
 
-  it 'master should has any skills' do
-    expect(test_master.services.to_a).not_to be_empty
+  describe "master factory" do
+    context "with nil first name" do
+      let(:master){ FactoryBot.create(:master, first_name: nil) }
+      include_examples "Raises not null violation error"
+    end
+
+    context "with nil last name" do
+      let(:master){ FactoryBot.create(:master, last_name: nil) }
+      include_examples "Raises not null violation error"
+    end
+
+    context "with nil phone number" do
+      let(:master){ FactoryBot.create(:master, phone_number: nil) }
+      include_examples "Raises not null violation error"
+    end    
   end
 
-  it 'master should has first_name' do
-    expect(test_master.first_name).not_to be_nil
-  end
+  describe "valid master factory" do
+    let(:master) { FactoryBot.create(:master) }
 
-  it 'master should has last_name' do
-    expect(test_master.last_name).not_to be_nil
-  end
+    context "is valid" do
+      it "with valid attributes" do
+        expect(master).to be_valid
+      end 
 
-  it 'master should has email' do
-    expect(test_master.email).not_to be_nil
-  end
+      it 'when has any skills' do
+        expect(FactoryBot.create(:master).services).not_to be_empty
+      end
 
-  it 'master should has phone_number' do
-    expect(test_master.phone_number).not_to be_nil
+      it "when contains a record with master & service id" do
+        expect(master.services.ids).to include MasterService.find_by(master_id: master).service_id
+      end
+    end
   end
 end

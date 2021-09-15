@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :client do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
-    email { Faker::Internet.email }
-    phone_number { Faker::PhoneNumber.cell_phone_in_e164 }
-    password { '111111' }
-    after(:create, &:confirm)
+  factory :client, parent: :user do
+    initialize_with { Client.new }
   end
 end
