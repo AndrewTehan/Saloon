@@ -48,7 +48,6 @@ class UsersController < ApplicationController
   end
 
   private
-
   def user_params
     params.require(@user.is_a?(Admin) ? :admin : :client).permit(:first_name, :last_name, :email, :phone_number)
   end
