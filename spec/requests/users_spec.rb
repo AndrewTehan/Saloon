@@ -45,15 +45,15 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe 'DELETE services' do
+  describe 'DELETE user' do
     it 'has a 200 status code' do
-      delete :services, params: params
-      expect(response.status).to eq(200)
+      delete :destroy, params: params
+      expect(response.status).to eq(302)
     end
   end
 
   describe 'GET edit' do
-    it 'has a 200 status code' do
+    it 'has a 302 status code' do
       get :edit, params: params
       expect(response.status).to eq(200)
     end
