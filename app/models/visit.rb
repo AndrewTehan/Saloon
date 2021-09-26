@@ -25,13 +25,13 @@ class Visit < ApplicationRecord
 
   accepts_nested_attributes_for :service_visit
 
-  validate :support_service, :check_date
+  validate :master_should_to_support_service, :date_cannot_be_in_the_past
   
-  def support_service
+  def master_should_to_support_service
     errors.add(:service, "isn't supported by selected master") unless master.services.include?(service_visit.service)
   end
 
-  def check_date
+  def date_cannot_be_in_the_past
     errors.add(:date, 'must be in future') if date < Time.now
   end
 end
