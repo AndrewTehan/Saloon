@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  def find_user
-    User.find_by(id: params[:id])
-  end
-
   def index
     @user = current_user
     @users = User.all
@@ -50,5 +46,9 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(@user.is_a?(Admin) ? :admin : :client).permit(:first_name, :last_name, :email, :phone_number)
+  end
+
+  def find_user
+    User.find(params[:id]) 
   end
 end
