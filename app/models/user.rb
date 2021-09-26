@@ -11,21 +11,21 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  validate :invalid_first_name, :invalid_last_name, :invalid_phone_number, :invalid_email
+  validate :first_name_cannot_be_blank, :last_name_cannot_be_blank, :phone_number_cannot_be_blank, :email_cannot_be_blank
 
-  def invalid_first_name
-    errors.add(:first_name, "shouldn't be empty") if first_name == ""
+  def first_name_cannot_be_blank
+    errors.add(:first_name, "shouldn't be empty") if first_name.blank?
   end
 
-  def invalid_last_name
-    errors.add(:last_name, "shouldn't be empty") if last_name == ""
+  def last_name_cannot_be_blank
+    errors.add(:last_name, "shouldn't be empty") if last_name.blank?
   end
 
-  def invalid_phone_number
-    errors.add(:phone_number, "shouldn't be empty") if phone_number == ""
+  def phone_number_cannot_be_blank
+    errors.add(:phone_number, "shouldn't be empty") if phone_number.blank?
   end
 
-  def invalid_email
-    errors.add(:email, "shouldn't be empty") if email == ""
+  def email_cannot_be_blank
+    errors.add(:email, "shouldn't be empty") if email.blank?
   end
 end
