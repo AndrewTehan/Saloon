@@ -47,14 +47,15 @@ RSpec.describe VisitsController, type: :controller do
   end
 
   describe 'create visit' do
-    let(:visit) { FactoryBot.create(:visit, client: user) }
-    let(:params) do { locale: I18n.locale, client_id: visit.client.id,
-                      visit: { client_id: visit.client.id,
-                              service_id: visit.service.id,
-                              master_id: visit.master.id,
-                              addition: visit.addition,
-                              date: visit.date,
-                              service_visit_attributes: { service_id: visit.service.id } } }
+    let(:client) {FactoryBot.create(:client)}
+    let(:service) {FactoryBot.create(:service)}
+    let(:master) { FactoryBot.create(:master, service_id: service.id) }
+    let(:params) do { locale: I18n.locale, client_id: client.id,
+                      visit: { client_id: client.id,
+                              master_id: master.id,
+                              addition: "",
+                              date: 10.days.from_now ,
+                              service_visit_attributes: { service_id: service.id } } }
     end
 
     it 'has a 302 status code' do
