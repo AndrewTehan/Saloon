@@ -61,6 +61,18 @@ RSpec.describe VisitsController, type: :controller do
     it 'create new visit' do
       expect { post :create, params: params }.to change { Visit.count }.by(1)
     end
+
+    it 'properly saved master' do
+      expect(Master.find_by(id: master.id)).to eq(master)
+    end
+
+    it 'properly saved service' do
+      expect(Service.find_by(id: service.id)).to eq(service)
+    end
+
+    it 'properly saved client' do
+      expect(Client.find_by(id: client.id)).to eq(client)
+    end
   end
 
   describe 'DELETE visit' do
