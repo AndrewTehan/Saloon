@@ -50,6 +50,23 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'POST update' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:params) do
+      { locale: I18n.locale, id: user.id, client: {
+        first_name: 'new_name', last_name: 'new_last_name', phone_number: '111', email: 'new@gmail.com'
+        } }
+    end
+    it 'updates user' do
+      put :update, params: params
+      user.reload
+      expect(user.first_name).to eq('new_name')
+      expect(user.last_name).to eq('new_last_name')
+      expect(user.phone_number).to eq('111')
+      expect(user.email).to eq('new@gmail.com')
+    end
+  end
+
   describe 'GET edit' do
     it 'has a 302 status code' do
       get :edit, params: params

@@ -50,17 +50,16 @@ RSpec.describe VisitsController, type: :controller do
     let(:client) {FactoryBot.create(:client)}
     let(:service) {FactoryBot.create(:service)}
     let(:master) { FactoryBot.create(:master, service_id: service.id) }
-    let(:params) do { locale: I18n.locale, client_id: client.id,
+    let(:params) do { locale: 'en', client_id: client.id,
                       visit: { client_id: client.id,
                               master_id: master.id,
                               addition: "",
                               date: 10.days.from_now ,
                               service_visit_attributes: { service_id: service.id } } }
     end
-
-    it 'has a 302 status code' do
-      post :create, params: params
-      expect(response.status).to eq(302)
+    
+    it 'create new visit' do
+      expect { post :create, params: params }.to change { Visit.count }.by(1)
     end
   end
 
