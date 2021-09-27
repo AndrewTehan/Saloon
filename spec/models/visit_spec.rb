@@ -38,7 +38,7 @@ RSpec.describe Visit, type: :model do
     end
   end
 
-  context "with invalid service" do
+  context "visit service doesn't match to the master's service" do
     let(:master){ FactoryBot.create(:master, :men_haircut) }
     let(:service){ FactoryBot.create(:service, :women_haircut) }
     let(:visit){ FactoryBot.create(:visit, service_id: service.id, master: master) }
@@ -46,7 +46,7 @@ RSpec.describe Visit, type: :model do
     include_examples "Raises validation error"
   end
 
-  context "with invalid date" do
+  context "visit date cann't be in the past" do
     let(:date){ 10.days.ago }
     let(:visit){ FactoryBot.create(:visit, :women_haircut, date: date) }
 
