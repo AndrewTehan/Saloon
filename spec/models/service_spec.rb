@@ -12,6 +12,7 @@ RSpec.describe Service, type: :model do
 
   describe "service_factory" do
     let(:service){ FactoryBot.create(:service) }
+    let!(:repeated_service){ FactoryBot.create(:service, :coloring) }
      
     it "should has positive price" do
       expect(service.price).not_to be < 0
@@ -19,6 +20,10 @@ RSpec.describe Service, type: :model do
 
     it "should has name" do
       expect(service.service_name).not_to be_nil
+    end
+
+    it "should has unique name" do  
+      expect{ FactoryBot.create(:service, :coloring) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 
