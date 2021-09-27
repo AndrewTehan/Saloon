@@ -65,13 +65,12 @@ RSpec.describe VisitsController, type: :controller do
   end
 
   describe 'DELETE visit' do
-    let(:visit) { FactoryBot.create(:visit, client: user) }
+    let!(:visit) { FactoryBot.create(:visit, client: user) }
     let(:params) do { locale: I18n.locale,  id: visit.id, client_id: visit.client.id }
     end
 
-    it 'has a 302 status code' do
-      delete :destroy, params: params
-      expect(response.status).to eq(302)
+    it 'remove user from db' do
+      expect { delete :destroy, params: params }.to change { Visit.count }.by(-1)
     end
   end
 end
