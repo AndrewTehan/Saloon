@@ -45,9 +45,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'DELETE user' do
-    it 'has a 200 status code' do
-      delete :destroy, params: params
-      expect(response.status).to eq(302)
+    it 'remove user from db' do
+        expect { delete :destroy, params: params }.to change { User.count }.by(-1)
     end
   end
 
