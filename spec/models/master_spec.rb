@@ -16,4 +16,8 @@ RSpec.describe Master, type: :model do
       end
     end
   end
+
+  it 'is unvalid without service' do
+    expect{ FactoryBot.create(:master, service_id: nil) }.to raise_error(ActiveRecord::RecordInvalid)
+  end
 end
