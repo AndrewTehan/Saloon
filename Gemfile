@@ -8,6 +8,7 @@ ruby '3.0.1'
 gem 'aasm'
 gem 'devise'
 gem 'money-rails', '~>1.12'
+gem "figaro"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'

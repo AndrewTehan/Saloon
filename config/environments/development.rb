@@ -48,8 +48,8 @@ Rails.application.configure do
     domain: 'smtp.gmail.com',
     authentication: :plain,
     enable_starttls_auto: true,
-    user_name: 'saloonofficial699@gmail.com',
-    password: 'saloon1415',
+    user_name: ENV["email_user_name"],
+    password: ENV["email_password"],
     openssl_verify_mode: 'none'
   }
 
