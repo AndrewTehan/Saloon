@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   before :each do
-    user.confirm
     sign_in user
   end
   
