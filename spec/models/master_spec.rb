@@ -37,10 +37,6 @@ RSpec.describe Master, type: :model do
       it 'when has any skills' do
         expect(FactoryBot.create(:master).services).not_to be_empty
       end
-
-      it "when contains a record with master & service id" do
-        expect(master.services.ids).to include MasterService.find_by(master_id: master).service_id
-      end
     end
   end
 end
