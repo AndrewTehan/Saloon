@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe VisitsController, type: :controller do
   before :each do
-    user.confirm
     sign_in user
   end
   
@@ -74,6 +73,18 @@ RSpec.describe VisitsController, type: :controller do
       expect(Client.find_by(id: client.id)).to eq(client)
     end
   end
+
+  # describe 'EDIT' do
+  #   let(:visit) { FactoryBot.create(:visit) }
+  #   let(:params) { { locale: I18n.locale, client_id: user.id, id: visit.id } }
+
+  #   it 'is possible only when state is sent' do
+  #     visit.state = 'confirmed'
+  #     binding.pry
+  #     get :edit, params: params
+  #     expect(response).to redirect_to client_visits_path(user)
+  #   end
+  # end
 
   describe 'DELETE visit' do
     let!(:visit) { FactoryBot.create(:visit, client: user) }

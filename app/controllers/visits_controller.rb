@@ -40,6 +40,7 @@ class VisitsController < ApplicationController
   def edit
     @client = current_user
     @visit = Visit.find_by(id: params[:id])
+    redirect_to client_visits_path(current_user), notice: 'Redaction is possible only when state is sent' if @visit.state != 'sent'
   end
 
   def update
