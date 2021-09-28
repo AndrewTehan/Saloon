@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe VisitsController, type: :controller do
   before :each do
     sign_in user
   end
-  
+
   let(:user) { FactoryBot.create(:user) }
   let(:admin) { FactoryBot.create(:user, type: Admin) }
   let(:params) { { locale: I18n.locale, client_id: user.id } }
@@ -46,17 +48,18 @@ RSpec.describe VisitsController, type: :controller do
   end
 
   describe 'create visit' do
-    let(:client) {FactoryBot.create(:client)}
-    let(:service) {FactoryBot.create(:service)}
+    let(:client) { FactoryBot.create(:client) }
+    let(:service) { FactoryBot.create(:service) }
     let(:master) { FactoryBot.create(:master, service_id: service.id) }
-    let(:params) do { locale: 'en', client_id: client.id,
-                      visit: { client_id: client.id,
-                              master_id: master.id,
-                              addition: "",
-                              date: 10.days.from_now ,
-                              service_visit_attributes: { service_id: service.id } } }
+    let(:params) do
+      { locale: 'en', client_id: client.id,
+        visit: { client_id: client.id,
+                 master_id: master.id,
+                 addition: '',
+                 date: 10.days.from_now,
+                 service_visit_attributes: { service_id: service.id } } }
     end
-    
+
     it 'create new visit' do
       expect { post :create, params: params }.to change { Visit.count }.by(1)
     end
@@ -88,7 +91,8 @@ RSpec.describe VisitsController, type: :controller do
 
   describe 'DELETE visit' do
     let!(:visit) { FactoryBot.create(:visit, client: user) }
-    let(:params) do { locale: I18n.locale,  id: visit.id, client_id: visit.client.id }
+    let(:params) do
+      { locale: I18n.locale, id: visit.id, client_id: visit.client.id }
     end
 
     it 'remove user from db' do

@@ -18,7 +18,7 @@ class VisitsController < ApplicationController
     when 'confirmed'
       @visit.finished!
     end
-    redirect_to admin_index_path()
+    redirect_to admin_index_path
   end
 
   def new
@@ -55,7 +55,7 @@ class VisitsController < ApplicationController
     @visit = Visit.find(params[:id])
     @visit.destroy
     if current_user.is_a?(Admin)
-      redirect_to admin_index_path()
+      redirect_to admin_index_path
     else
       redirect_to client_visits_path(current_user)
     end

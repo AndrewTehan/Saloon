@@ -14,10 +14,10 @@ class Service < ApplicationRecord
   validate :not_negative_price, :empty_service_name
 
   def not_negative_price
-    errors.add(:price, "shouldn't be negative") if price < 0
+    errors.add(:price, "shouldn't be negative") if price.negative?
   end
 
   def empty_service_name
-    errors.add(:service_name, "shoundn't be empty") if service_name == ""
+    errors.add(:service_name, "shoundn't be empty") if service_name == ''
   end
 end

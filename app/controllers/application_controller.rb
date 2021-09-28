@@ -7,8 +7,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from ActionController::RoutingError, with: -> { render_404 } unless Rails.application.config.consider_all_requests_local
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404 } unless Rails.application.config.consider_all_requests_local
-  
+
   protected
+
   def default_url_options
     { locale: I18n.locale }
   end

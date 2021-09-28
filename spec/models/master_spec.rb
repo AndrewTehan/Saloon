@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Master, type: :model do
-  describe "valid master factory" do
+  describe 'valid master factory' do
     let(:master) { FactoryBot.create(:master) }
 
-    context "factory" do
-      it "is valid with valid attributes" do
+    context 'factory' do
+      it 'is valid with valid attributes' do
         expect(maste).to be_valid
-      end 
+      end
 
       it 'is valid when has any skills' do
         expect(FactoryBot.create(:master).services).not_to be_empty
@@ -18,6 +18,6 @@ RSpec.describe Master, type: :model do
   end
 
   it 'is unvalid without service' do
-    expect{ FactoryBot.create(:master, service_id: nil) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect { FactoryBot.create(:master, service_id: nil) }.to raise_error(ActiveRecord::RecordInvalid)
   end
 end

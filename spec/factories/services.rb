@@ -59,7 +59,7 @@ FactoryBot.define do
       service_name { 'Balayazh' }
       price { 27 }
     end
-    
+
     trait :eyebrow_correction do
       service_name { 'Eyebrow Correction' }
       price { 17 }

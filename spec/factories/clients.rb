@@ -5,15 +5,15 @@ FactoryBot.define do
     initialize_with { Client.new }
 
     trait :andrewtehanov_email do
-      email { "andrewtehanov@gmail.com" }
+      email { 'andrewtehanov@gmail.com' }
     end
 
     trait :tehanov_last_name do
-      last_name { "tehanov" }
+      last_name { 'tehanov' }
     end
 
     trait :tehanov_first_name do
-      first_name { "andrew" }
+      first_name { 'andrew' }
     end
-  end  
+  end
 end

@@ -26,7 +26,7 @@ class Visit < ApplicationRecord
   accepts_nested_attributes_for :service_visit
 
   validate :master_should_to_support_service, :date_cannot_be_in_the_past
-  
+
   def master_should_to_support_service
     errors.add(:service, "isn't supported by selected master") unless master.services.include?(service_visit.service)
   end

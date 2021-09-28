@@ -44,12 +44,13 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     @required_key = @user.is_a?(Admin) ? :admin : :client
     params.require(@required_key).permit(:first_name, :last_name, :email, :phone_number)
   end
 
   def find_user
-    User.find(params[:id]) 
+    User.find(params[:id])
   end
 end

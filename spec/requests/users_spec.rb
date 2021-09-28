@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   before :each do
     sign_in user
   end
-  
+
   let(:user) { FactoryBot.create(:user) }
   let(:params) { { locale: I18n.locale, id: user.id } }
 
@@ -46,7 +48,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'DELETE user' do
     it 'remove user from db' do
-        expect { delete :destroy, params: params }.to change { User.count }.by(-1)
+      expect { delete :destroy, params: params }.to change { User.count }.by(-1)
     end
   end
 
@@ -55,7 +57,7 @@ RSpec.describe UsersController, type: :controller do
     let(:params) do
       { locale: I18n.locale, id: user.id, client: {
         first_name: 'new_name', last_name: 'new_last_name', phone_number: '111', email: 'new@gmail.com'
-        } }
+      } }
     end
     it 'updates user' do
       put :update, params: params

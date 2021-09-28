@@ -7,8 +7,8 @@ ruby '3.0.1'
 
 gem 'aasm'
 gem 'devise'
+gem 'figaro'
 gem 'money-rails', '~>1.12'
-gem "figaro"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
@@ -44,8 +44,8 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'pry'
   gem 'pry-byebug'
-  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'pry-rails'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'rspec-rails', '~> 5.0.0'
 end
 
