@@ -6,12 +6,12 @@ RSpec.describe Master, type: :model do
   describe "valid master factory" do
     let(:master) { FactoryBot.create(:master) }
 
-    context "is valid" do
-      it "with valid attributes" do
-        expect(master).to be_valid
+    context "factory" do
+      it "is valid with valid attributes" do
+        expect(maste).to be_valid
       end 
 
-      it 'when has any skills' do
+      it 'is valid when has any skills' do
         expect(FactoryBot.create(:master).services).not_to be_empty
       end
     end
