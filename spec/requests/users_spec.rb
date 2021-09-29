@@ -10,6 +10,15 @@ RSpec.describe UsersController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
   let(:params) { { locale: I18n.locale, id: user.id } }
 
+  describe 'create user devise' do
+    let(:destination) { FactoryBot.create(:user) }
+    it 'sent email' do
+      expect { destination }.to change { ActionMailer::Base.deliveries.size }.by(1)      
+      expect(ActionMailer::Base.deliveries.last[:To].value).to eq(destination.email)
+      expect(ActionMailer::Base.deliveries.last[:Subject].value).to eq('Confirmation instructions')
+    end
+  end
+
   describe 'GET index' do
     it 'has a 200 status code' do
       get :index, params: params
