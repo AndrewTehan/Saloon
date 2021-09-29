@@ -13,9 +13,18 @@ RSpec.describe UsersController, type: :controller do
   describe 'create user devise' do
     let(:destination) { FactoryBot.create(:user) }
     it 'sent email' do
-      expect { destination }.to change { ActionMailer::Base.deliveries.size }.by(1)      
+      expect { destination }.to change { ActionMailer::Base.deliveries.size }.by(1)
       expect(ActionMailer::Base.deliveries.last[:To].value).to eq(destination.email)
       expect(ActionMailer::Base.deliveries.last[:Subject].value).to eq('Confirmation instructions')
+    end
+  end
+
+  describe 'create user devise' do
+    let(:destination) { FactoryBot.create(:user) }
+    it 'sent email' do
+      expect { destination.send_reset_password_instructions }.to change { ActionMailer::Base.deliveries.size }.by(2)
+      expect(ActionMailer::Base.deliveries.last[:To].value).to eq(destination.email)
+      expect(ActionMailer::Base.deliveries.last[:Subject].value).to eq('Reset password instructions')
     end
   end
 
