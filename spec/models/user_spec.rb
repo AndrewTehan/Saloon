@@ -53,5 +53,12 @@ RSpec.describe User, type: :model do
       let(:user) { FactoryBot.create(:user, email: nil) }
       include_examples 'Raises validation error'
     end
+
+    context 'valid data' do
+      let(:user) { create(:user, first_name: 'Andrew') }
+      it 'stores first_name correctly' do
+        expect(user.first_name).to eq('Andrew')
+      end
+    end
   end
 end
