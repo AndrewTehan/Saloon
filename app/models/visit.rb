@@ -1,7 +1,9 @@
 # frozen_string_literal: true
+require 'elasticsearch/model'
 
 class Visit < ApplicationRecord
   include AASM
+  include Elasticsearch::Model
 
   aasm column: 'state' do
     state :sent, initial: true
@@ -35,3 +37,6 @@ class Visit < ApplicationRecord
     errors.add(:date, 'must be in future') if date < Time.now
   end
 end
+
+Visit.__elasticsearch__.create_index!
+Visit.import

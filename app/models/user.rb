@@ -1,6 +1,9 @@
 # frozen_string_literal: true
+require 'elasticsearch/model'
 
 class User < ApplicationRecord
+  include Elasticsearch::Model
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,3 +32,5 @@ class User < ApplicationRecord
     errors.add(:email, "shouldn't be empty") if email.blank?
   end
 end
+User.__elasticsearch__.create_index!
+User.import

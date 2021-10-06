@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[destroy edit update]
 
+    post '/search', to: 'users#search'
     get '/admin_index', to: 'visits#admin_index'
     get '/clients_list', to: 'users#clients'
     get '/team', to: 'users#team'
