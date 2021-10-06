@@ -16,7 +16,7 @@
                 <span class="btn-get-started scrollto"><%= link_to t("index.add_visit"), new_client_visit_path(current_user), method: :get, class: 'text-white' %></span>
               <%end%>
               <%if current_user.is_a?(Admin)%>
-                <span class="btn-get-started scrollto"><%= link_to t("index.all_visits"), client_visits_path(current_user), method: :get, class: 'text-white'%></span>
+                <span class="btn-get-started scrollto"><%= link_to t("index.all_visits"), admin_index_path(), method: :get, class: 'text-white'%></span>
               <%else%>
                 <span class="btn-get-started scrollto"><%= link_to t("index.my_visits"), client_visits_path(current_user), method: :get, class: 'text-white' %></span>
               <%end%>

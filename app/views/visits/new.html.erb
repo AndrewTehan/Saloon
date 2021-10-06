@@ -28,7 +28,7 @@
               </select>
             </div>
             <div class="col-md-3 form-group">
-              <%= form.collection_select "service_visit_attributes[service_id]", Service.all, :id, :master_service, {},  {class: "form-select", aria_label: "Default select example", required: true }%>
+              <%= form.collection_select "service_visit_attributes[service_id]", Service.all, :id, :service_name, {},  {class: "form-select", aria_label: "Default select example", required: true }%>
             </div>
           </div>
 

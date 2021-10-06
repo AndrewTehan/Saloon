@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateServiceVisits < ActiveRecord::Migration[6.1]
   def change
     create_table :service_visits do |t|

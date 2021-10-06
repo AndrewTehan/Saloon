@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddForiengKeyServiceVisits < ActiveRecord::Migration[6.1]
   def change
     add_foreign_key :service_visits, :services, column: :service_id, primar_key: :id
