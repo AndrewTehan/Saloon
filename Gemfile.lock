@@ -1,10 +1,30 @@
 GIT
+  remote: https://github.com/elastic/elasticsearch-rails.git
+  revision: 606f3482e298fab0afc5a083468f23ec7464b0d3
+  branch: 6.x
+  specs:
+    elasticsearch-model (6.1.0)
+      activesupport (> 3)
+      elasticsearch (~> 6)
+      hashie
+    elasticsearch-rails (6.1.0)
+
+GIT
   remote: https://github.com/faker-ruby/faker.git
   revision: 148219533bac493259a6b734f45ac9310ac4e853
   branch: master
   specs:
     faker (2.19.0)
       i18n (>= 1.6, < 2)
+
+GIT
+  remote: https://github.com/omc/bonsai-elasticsearch-rails.git
+  revision: 4089c7916601ef7ec5e496c199004a6958cd8016
+  branch: 6.x
+  specs:
+    bonsai-elasticsearch-rails (6.0.0)
+      elasticsearch-model (~> 6)
+      elasticsearch-rails (~> 6)
 
 GEM
   remote: https://rubygems.org/
@@ -105,17 +125,12 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
-    elasticsearch (7.15.0)
-      elasticsearch-api (= 7.15.0)
-      elasticsearch-transport (= 7.15.0)
-    elasticsearch-api (7.15.0)
+    elasticsearch (6.8.3)
+      elasticsearch-api (= 6.8.3)
+      elasticsearch-transport (= 6.8.3)
+    elasticsearch-api (6.8.3)
       multi_json
-    elasticsearch-model (7.2.0)
-      activesupport (> 3)
-      elasticsearch (~> 7)
-      hashie
-    elasticsearch-rails (7.2.0)
-    elasticsearch-transport (7.15.0)
+    elasticsearch-transport (6.8.3)
       faraday (~> 1)
       multi_json
     erubi (1.10.0)
@@ -373,13 +388,14 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  bonsai-elasticsearch-rails!
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.0.1)
   byebug
   capybara (>= 3.26)
   devise
-  elasticsearch-model (~> 7.2)
-  elasticsearch-rails (~> 7.2)
+  elasticsearch-model!
+  elasticsearch-rails!
   factory_bot_rails
   faker!
   figaro
