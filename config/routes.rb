@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root "/#{I18n.locale}", controller: 'users', action: 'index'
   scope ':locale', locale: /ru|en/ do
-    root 'users#index', locale: I18n.locale
     devise_for :users
 
     resources :clients, controller: :users, only: %i[index show] do
